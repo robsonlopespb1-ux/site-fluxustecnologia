@@ -68,7 +68,7 @@ Atributos a transmitir: tecnologia, competência, inovação, confiança, sofist
 
 ### 2.1 Dentro do escopo (v1)
 
-- Home, páginas de serviços, página de produto (Fluxus Gestão para Igrejas), cases, sobre, contato, política de privacidade.
+- Home, páginas de serviços, página de produto (Fluxus Gestão para Igrejas), cases, quem somos, contato, política de privacidade.
 - Formulário de contato funcional sem backend próprio (ver §12).
 - SEO técnico completo, acessibilidade WCAG 2.1 AA, dark mode como identidade única.
 - Conteúdo 100% estático (sem banco de dados, sem CMS na v1).
@@ -195,7 +195,7 @@ Nada de Husky/lint-staged na v1 (time de uma pessoa; o build do Railway a cada d
 /cases/portal-conselho-comunidade-jp Case 1 — Portal do Conselho
 /cases/bia-assistente-ia             Case 2 — BIA
 /cases/fluxus-gestao-igrejas         Case 3 — SaaS de igrejas
-/sobre                               A empresa, abordagem, forma de trabalhar
+/quem-somos                          A empresa, abordagem, forma de trabalhar
 /contato                             Formulário + WhatsApp + Instagram + e-mail
 /politica-de-privacidade             LGPD (obrigatória por haver formulário)
 ```
@@ -205,7 +205,7 @@ Reservadas para o futuro (não criar agora, não conflitar): `/blog`, `/blog/[sl
 ### 5.3 Navegação
 
 **Header (fixo, com fundo que ganha opacidade no scroll):**
-`Serviços` · `Produtos` · `Cases` · `Sobre` · CTA destacado `Fale conosco` (amarelo — único elemento de cor cheia no header).
+`Serviços` · `Produtos` · `Cases` · `Quem somos` · CTA destacado `Fale conosco` (amarelo — único elemento de cor cheia no header).
 
 Sem dropdowns na v1 — 4 serviços não justificam a complexidade de acessibilidade de um menu suspenso. O hub `/servicos` cumpre o papel.
 
@@ -254,7 +254,7 @@ site-fluxustecnologia/
 │   │   ├── cases/
 │   │   │   ├── page.tsx
 │   │   │   └── [slug]/page.tsx
-│   │   ├── sobre/page.tsx
+│   │   ├── quem-somos/page.tsx
 │   │   ├── contato/page.tsx
 │   │   ├── politica-de-privacidade/page.tsx
 │   │   └── api/
@@ -778,7 +778,7 @@ Scaffold do projeto (Next 16 + TS strict + Tailwind v4), tokens do design system
 Primitivas de `components/ui`, `Header`/`Footer`/`MobileMenu` acessíveis, página 404, elementos gráficos da marca (linhas de fluxo v1). *Critério: navegação completa por teclado; ritmo visual aprovado em preview.*
 
 **Fase 2 — Conteúdo e páginas (2–3 sessões)**
-`src/data` completo (redação seguindo §10, com revisão contra a lista do §10.6), Home, serviços (hub + 4), produto, cases (hub + 3, com screenshots reais coletadas), sobre. SEO por página (metadata, JSON-LD, sitemap, robots, OG estáticas). *Critério: todas as rotas no ar; Rich Results Test passando.*
+`src/data` completo (redação seguindo §10, com revisão contra a lista do §10.6), Home, serviços (hub + 4), produto, cases (hub + 3, com screenshots reais coletadas), quem somos. SEO por página (metadata, JSON-LD, sitemap, robots, OG estáticas). *Critério: todas as rotas no ar; Rich Results Test passando.*
 
 **Fase 3 — Contato e conversão (1 sessão)**
 Route handler + Resend (com domínio verificado), formulário acessível com `useActionState`, honeypot/rate-limit, política de privacidade, links de WhatsApp contextuais. *Critério: e-mail chegando; erro e sucesso anunciados por leitor de tela.*

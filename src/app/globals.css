@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/*
+ * Tokens do design system Fluxus (docs/ARQUITETURA.md §8.1).
+ * Dark-first: o fundo escuro é a identidade, não um "modo".
+ * Paleta provisória — sujeita a validação com o logo real (risco nº 1, §23).
+ */
+@theme {
+  /* Superfícies (ink) */
+  --color-ink-950: #0d0d0d; /* fundo profundo: hero, footer, ênfase */
+  --color-ink-900: #1a1a1a; /* fundo padrão de página */
+  --color-ink-800: #242424; /* superfícies elevadas: cards, header com scroll */
+  --color-ink-700: #2e2e2e; /* bordas fortes, divisores visíveis */
+
+  /* Hairlines */
+  --color-line: rgb(255 255 255 / 0.08);
+
+  /* Marca */
+  --color-brand-500: #f5a623; /* amarelo principal — CTAs, destaques */
+  --color-brand-600: #e5a000; /* dourado — hover de CTA, detalhes */
+
+  /* Texto (sobre ink-900: ~17:1, ~8:1, ~4.6:1) */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b3b3b3;
+  --color-text-tertiary: #8c8c8c; /* uso restrito — validar contraste caso a caso (§14.3) */
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-ink-900);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background-color: var(--color-brand-500);
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+  }
+}
