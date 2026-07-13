@@ -23,6 +23,10 @@
   --color-text-primary: #ffffff;
   --color-text-secondary: #b3b3b3;
   --color-text-tertiary: #8c8c8c; /* uso restrito — validar contraste caso a caso (§14.3) */
+
+  /* Movimento (§16: durações curtas, ease-out) */
+  --transition-base: 200ms;
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
@@ -55,4 +59,81 @@
     outline: 2px solid var(--color-brand-500);
     outline-offset: 2px;
   }
+
+  /*
+   * Hierarquia tipográfica (§8.2) — Inter, pesos 400/500/600/700.
+   * h1 interno; o display do hero usa a utility text-display.
+   */
+  h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  p {
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+}
+
+/* ————— Utilities do design system ————— */
+
+/* Display do hero (§8.2) */
+@utility text-display {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+/* Números de destaque (métricas futuras — §11) */
+@utility text-stat {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Legendas / metadata */
+@utility text-caption {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-tertiary);
+}
+
+/* Padding vertical padrão de seção (§8.3): 3rem mobile → 5rem desktop */
+@utility section-padding {
+  padding-block: 3rem;
+  @media (width >= 64rem) {
+    padding-block: 5rem;
+  }
+}
+
+/* Transição padrão do site: 200ms, ease-out suave */
+@utility transition-base {
+  transition-property: color, background-color, border-color, opacity,
+    transform, visibility;
+  transition-duration: var(--transition-base);
+  transition-timing-function: var(--ease-soft);
 }
