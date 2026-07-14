@@ -18,6 +18,8 @@ interface ImageCarouselProps {
   aspectClassName?: string;
   className?: string;
   intervalMs?: number;
+  /** Cor das bolinhas inativas conforme o fundo da seção. */
+  dotsVariant?: "light" | "dark";
 }
 
 /**
@@ -31,6 +33,7 @@ export function ImageCarousel({
   aspectClassName,
   className,
   intervalMs = 4000,
+  dotsVariant = "light",
 }: ImageCarouselProps) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -97,9 +100,11 @@ export function ImageCarousel({
               aria-current={i === index}
               className={cn(
                 "size-2 rounded-full transition-base",
-                i === index
-                  ? "bg-brand-500"
-                  : "bg-ink-900/20 hover:bg-ink-900/40",
+                i === index && "bg-brand-500",
+                i !== index &&
+                  (dotsVariant === "dark"
+                    ? "bg-white/25 hover:bg-white/50"
+                    : "bg-ink-900/20 hover:bg-ink-900/40"),
               )}
             />
           ))}

@@ -55,8 +55,8 @@ export function Cases() {
               ))}
             </ul>
 
-            {featured.externalUrl && (
-              <div className="mt-8">
+            <div className="mt-8 flex flex-wrap items-center gap-5">
+              {featured.externalUrl && (
                 <Button
                   href={featured.externalUrl}
                   external
@@ -65,8 +65,14 @@ export function Cases() {
                 >
                   Ver projeto ao vivo →
                 </Button>
-              </div>
-            )}
+              )}
+              <Link
+                href={`/projetos/${featured.slug}`}
+                className="text-sm font-medium text-brand-700 underline-offset-4 transition-base hover:underline"
+              >
+                Detalhes do projeto →
+              </Link>
+            </div>
           </div>
         </article>
         </ScrollReveal>
@@ -87,7 +93,10 @@ export function Cases() {
               <div className="p-6">
                 <p className="text-caption uppercase tracking-widest">{item.type}</p>
                 <h3 className="mt-2 transition-base group-hover:text-brand-700">
-                  <Link href="/projetos" className="after:absolute after:inset-0">
+                  <Link
+                    href={`/projetos/${item.slug}`}
+                    className="after:absolute after:inset-0"
+                  >
                     {item.name}
                   </Link>
                 </h3>

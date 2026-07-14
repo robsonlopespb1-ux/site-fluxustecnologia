@@ -35,7 +35,7 @@ export const hero = {
   titleStatic: "Desenvolvemos",
   /** Parte rotativa do h1 — a primeira frase é a exibida com reduced motion */
   rotatingPhrases: [
-    "sites que geram resultados",
+    "sites que funcionam",
     "sistemas que resolvem",
     "IA que automatiza",
     "soluções sob medida",
