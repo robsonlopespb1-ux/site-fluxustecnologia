@@ -87,6 +87,164 @@ export const homeServices: HomeService[] = [
   },
 ];
 
+/* ————— Cases (§10.4/§11) — apenas dados reais, nada inventado ————— */
+
+export interface CaseImage {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+export interface CaseItem {
+  slug: string;
+  name: string;
+  organization: string;
+  type: string;
+  description: string;
+  features: string[];
+  /** TODO: preencher com a stack real de cada projeto (conteúdo pendente).
+   *  Enquanto vazio, a linha de tecnologias não é renderizada. */
+  technologies: string[];
+  images: CaseImage[];
+  externalUrl: string | null;
+  /** Nunca inventar — permanecem null até existirem dados reais autorizados (§11). */
+  testimonial: null;
+  metrics: null;
+}
+
+export const cases: CaseItem[] = [
+  {
+    slug: "portal-conselho-comunidade",
+    name: "Portal do Conselho da Comunidade",
+    organization: "Conselho da Comunidade da Comarca de João Pessoa/PB",
+    type: "Portal institucional",
+    description:
+      "Portal institucional completo com portal de notícias, assistente virtual com IA, área de transparência e sistema de doações.",
+    features: [
+      "Portal de notícias",
+      "Assistente virtual (BIA)",
+      "Transparência com notas fiscais",
+      "Doações via PIX",
+      "≈16 páginas",
+      "Responsivo",
+    ],
+    technologies: [],
+    images: [
+      {
+        src: "/images/cases/portal-conselho-home.png",
+        alt: "Página inicial do Portal do Conselho da Comunidade da Comarca de João Pessoa",
+        width: 1365,
+        height: 593,
+      },
+    ],
+    externalUrl: "https://www.conselhodacomunidadejp.com.br",
+    testimonial: null,
+    metrics: null,
+  },
+  {
+    slug: "bia-assistente-virtual",
+    name: "BIA",
+    organization: "Conselho da Comunidade da Comarca de João Pessoa/PB",
+    type: "Inteligência Artificial",
+    description:
+      "Assistente virtual com IA integrada ao portal institucional para atendimento, informações e orientação aos cidadãos.",
+    features: [
+      "Atendimento automatizado",
+      "Consulta de informações",
+      "Integração com o portal",
+      "Interface conversacional",
+    ],
+    technologies: [],
+    images: [
+      {
+        src: "/images/cases/bia-chat.png",
+        alt: "Janela de conversa da BIA, assistente virtual do Conselho da Comunidade",
+        width: 376,
+        height: 439,
+      },
+    ],
+    externalUrl: "https://www.conselhodacomunidadejp.com.br",
+    testimonial: null,
+    metrics: null,
+  },
+  {
+    slug: "fluxus-gestao-igrejas",
+    name: "Fluxus Gestão para Igrejas",
+    organization: "Fluxus Tecnologia (produto próprio)",
+    type: "Plataforma SaaS",
+    description:
+      "Plataforma SaaS modular para gestão completa de igrejas — membros, financeiro, ação social, voluntários e multi-templo.",
+    features: [
+      "Gestão de membros",
+      "Financeiro completo",
+      "Ação social com distribuições",
+      "Banco de voluntários",
+      "Eventos e relatórios",
+      "Multi-templo",
+    ],
+    technologies: [],
+    images: [
+      {
+        src: "/images/cases/fluxus-igrejas-acao-social.png",
+        alt: "Módulo de Ação Social do Fluxus Gestão para Igrejas, com dashboard de distribuições e estoque",
+        width: 1365,
+        height: 605,
+      },
+      {
+        src: "/images/cases/fluxus-igrejas-financeiro.png",
+        alt: "Módulo Financeiro do Fluxus Gestão para Igrejas, com visão geral de saldos, receitas e despesas",
+        width: 1363,
+        height: 602,
+      },
+      {
+        src: "/images/cases/fluxus-igrejas-site.png",
+        alt: "Página inicial do Fluxus Gestão para Igrejas, com o título “Menos burocracia. Mais Ministérios.”",
+        width: 1363,
+        height: 617,
+      },
+    ],
+    externalUrl: null,
+    testimonial: null,
+    metrics: null,
+  },
+];
+
+/* ————— Diferenciais (§10.5) — específicos e demonstráveis ————— */
+
+export interface Differential {
+  number: string;
+  title: string;
+  description: string;
+}
+
+export const differentials: Differential[] = [
+  {
+    number: "01",
+    title: "Soluções a partir de problemas reais",
+    description:
+      "Não criamos tecnologia por criar. Cada projeto começa entendendo o problema real da organização e desenvolvendo a solução que resolve de verdade.",
+  },
+  {
+    number: "02",
+    title: "Tecnologia + compreensão institucional",
+    description:
+      "Entendemos como organizações funcionam por dentro — processos, hierarquias, necessidades. A tecnologia que entregamos se encaixa na realidade de quem vai usar.",
+  },
+  {
+    number: "03",
+    title: "Arquitetura preparada para crescer",
+    description:
+      "Nenhum projeto nosso nasce engessado. Construímos com arquitetura que permite evoluir, escalar e integrar com novos serviços quando a organização precisar.",
+  },
+  {
+    number: "04",
+    title: "Acompanhamento de verdade",
+    description:
+      "Não entregamos o projeto e desaparecemos. Mantemos proximidade, iteramos juntos e garantimos que a solução funcione no dia a dia real.",
+  },
+];
+
 /* ————— Home: Produto próprio (§10.3) ————— */
 
 export const product = {

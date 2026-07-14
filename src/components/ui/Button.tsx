@@ -25,6 +25,8 @@ interface ButtonProps {
   size?: ButtonSize;
   /** Com href renderiza <Link>; sem href, <button>. */
   href?: string;
+  /** Link externo: <a> com target="_blank" e rel seguro. */
+  external?: boolean;
   type?: "button" | "submit";
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLElement>;
@@ -36,6 +38,7 @@ export function Button({
   variant = "primary",
   size = "default",
   href,
+  external = false,
   type = "button",
   disabled,
   onClick,
@@ -43,6 +46,21 @@ export function Button({
   children,
 }: ButtonProps) {
   const classes = cn(baseClasses, variantClasses[variant], sizeClasses[size], className);
+
+  if (href && external) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={classes}
+        onClick={onClick}
+      >
+        {children}
+        <span className="sr-only">(abre em nova aba)</span>
+      </a>
+    );
+  }
 
   if (href) {
     return (
