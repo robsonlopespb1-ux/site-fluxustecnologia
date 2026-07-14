@@ -35,13 +35,13 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-ink-950/80 backdrop-blur-md">
-      <Container className="flex h-16 items-center justify-between gap-6">
+      <Container className="flex h-14 items-center justify-between gap-6 lg:h-16">
         <Link
           href="/"
           aria-label="Fluxus Tecnologia — página inicial"
           className="rounded-lg"
         >
-          <Logo variant="sm" />
+          <Logo variant="header" />
         </Link>
 
         {/* Navegação desktop */}
@@ -78,7 +78,7 @@ export function Header() {
             aria-expanded={open}
             aria-controls="menu-mobile"
             aria-label="Abrir menu"
-            className="rounded-lg p-2 text-text-primary transition-base hover:text-brand-500 lg:hidden"
+            className="-mr-2.5 rounded-lg p-2.5 text-text-primary transition-base hover:text-brand-500 lg:hidden"
           >
             <MenuIcon className="size-6" />
           </button>
@@ -94,19 +94,19 @@ export function Header() {
           open ? "visible opacity-100" : "invisible opacity-0",
         )}
       >
-        <Container className="flex h-16 items-center justify-between">
+        <Container className="flex h-14 items-center justify-between lg:h-16">
           <Link
             href="/"
             aria-label="Fluxus Tecnologia — página inicial"
             onClick={() => setOpen(false)}
           >
-            <Logo variant="sm" />
+            <Logo variant="header" />
           </Link>
           <button
             type="button"
             onClick={() => setOpen(false)}
             aria-label="Fechar menu"
-            className="rounded-lg p-2 text-text-primary transition-base hover:text-brand-500"
+            className="-mr-2.5 rounded-lg p-2.5 text-text-primary transition-base hover:text-brand-500"
           >
             <CloseIcon className="size-6" />
           </button>

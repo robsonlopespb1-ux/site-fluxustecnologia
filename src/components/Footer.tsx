@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-3">
           {/* Marca */}
           <div className="flex flex-col gap-4">
-            <Logo />
+            <Logo variant="footer" />
             <p className="max-w-xs text-sm">{site.description}</p>
           </div>
 

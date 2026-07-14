@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# vídeo original não comprimido do hero (pesado demais para o repositório)
+public/videos/hero-bg-original.mp4

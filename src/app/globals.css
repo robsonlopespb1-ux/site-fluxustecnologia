@@ -98,9 +98,9 @@
 
 /* ————— Utilities do design system ————— */
 
-/* Display do hero (§8.2) */
+/* Display do hero (§8.2) — piso menor no mobile para caber o texto rotativo */
 @utility text-display {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2.25rem, 1.25rem + 4.5vw, 4.5rem);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.025em;
@@ -136,4 +136,82 @@
     transform, visibility;
   transition-duration: var(--transition-base);
   transition-timing-function: var(--ease-soft);
+}
+
+/* ————— Luz orbital do ícone do logo (hover) ————— */
+
+/* Necessário para animar a custom property usada no conic-gradient */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-border {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@layer components {
+  /*
+   * Anel de luz: pseudo-elemento 2px maior que o container, com um ponto
+   * dourado em conic-gradient. A máscara (content-box XOR borda externa)
+   * recorta apenas o anel — o miolo fica livre para o fundo do container.
+   */
+  .logo-orbit::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(
+      from var(--angle),
+      transparent 0%,
+      transparent 70%,
+      var(--color-brand-500) 75%,
+      transparent 80%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 300ms var(--ease-soft);
+    pointer-events: none;
+  }
+
+  /* Só em dispositivos com hover real (desktop) */
+  @media (hover: hover) {
+    .group:hover .logo-orbit::before {
+      opacity: 1;
+      animation: rotate-border 2s linear infinite;
+    }
+  }
+
+  /* Reduced motion: sem órbita — fica o glow estático intensificado */
+  @media (prefers-reduced-motion: reduce) {
+    .group:hover .logo-orbit::before {
+      animation: none;
+    }
+  }
+}
+
+/* Entrada da palavra rotativa do hero (fade + slide-up) */
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
+}
+
+@utility animate-word-in {
+  animation: word-in 300ms var(--ease-soft);
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 }
