@@ -153,6 +153,17 @@ export function ContactForm() {
         </button>
       </div>
 
+      <p className="mt-3 text-xs text-[#6b6b6b]">
+        Ao enviar, você concorda com nossa{" "}
+        <a
+          href="/politica-de-privacidade"
+          className="underline underline-offset-2 transition-base hover:text-ink-900"
+        >
+          Política de Privacidade
+        </a>
+        .
+      </p>
+
       {/* Resultado anunciado a leitores de tela */}
       <div aria-live="polite" className="mt-4 min-h-6">
         {status === "success" && (

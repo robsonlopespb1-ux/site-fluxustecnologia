@@ -72,10 +72,16 @@ export function Footer() {
           </address>
         </div>
 
-        <div className="mt-12 border-t border-line pt-6">
+        <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-caption">
             © {new Date().getFullYear()} {site.name}. Todos os direitos reservados.
           </p>
+          <Link
+            href="/politica-de-privacidade"
+            className="text-caption transition-base hover:text-text-secondary"
+          >
+            Política de Privacidade
+          </Link>
         </div>
       </Container>
     </footer>

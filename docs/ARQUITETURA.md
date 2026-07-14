@@ -126,6 +126,12 @@ Princípio: **cada dependência precisa pagar seu custo** (peso no bundle, super
 | Por que é necessária | O nível visual pretendido (§9) depende de animações orquestradas (stagger, reveal coordenado). Implementar orquestração robusta à mão vira uma mini-biblioteca interna. |
 | Alternativa sem dependência | CSS `@keyframes` + `IntersectionObserver` em um hook próprio (~40 linhas) + a API nativa de View Transitions. Cobre fade-in/slide-up simples. **Estratégia adotada: começar com a alternativa nativa na Fase 1–2 e só adicionar `motion` na Fase 3 (polimento) se a orquestração exigir.** |
 
+> **Status (implementação):** `motion` **não foi necessária** — todos os efeitos
+> (reveal on scroll com observer compartilhado, stagger, shimmer, typewriter,
+> letras energizadas, luz orbital, carrossel, fichário sticky) foram feitos com
+> CSS + IntersectionObserver nativos. Dependências de runtime instaladas:
+> `clsx`, `tailwind-merge` e `resend` (formulário, §12).
+
 #### `clsx` + `tailwind-merge` — **recomendadas**
 
 | Critério | Análise |
@@ -182,30 +188,30 @@ Nada de Husky/lint-staged na v1 (time de uma pessoa; o build do Railway a cada d
 ### 5.2 Mapa de rotas
 
 ```
-/                                    Home
-/servicos                            Hub de serviços (visão geral + navegação)
-/servicos/sites-institucionais       Serviço 1
-/servicos/sistemas-web               Serviço 2
-/servicos/ia-e-automacoes            Serviço 3
-/servicos/consultoria                Serviço 4
-/produtos                            Hub de produtos próprios
-/produtos/gestao-para-igrejas        Fluxus Gestão para Igrejas (aponta para o
-                                     futuro subdomínio igrejas.fluxustecnologia.com.br)
-/cases                               Hub de cases
-/cases/portal-conselho-comunidade-jp Case 1 — Portal do Conselho
-/cases/bia-assistente-ia             Case 2 — BIA
-/cases/fluxus-gestao-igrejas         Case 3 — SaaS de igrejas
-/quem-somos                          A empresa, abordagem, forma de trabalhar
-/contato                             Formulário + WhatsApp + Instagram + e-mail
-/politica-de-privacidade             LGPD (obrigatória por haver formulário)
+/                                     Home
+/a-fluxus                             A empresa, abordagem, forma de trabalhar
+/solucoes                             Soluções — os 4 serviços detalhados em seções
+/produtos                             Produtos próprios (Fluxus Gestão para Igrejas)
+/projetos                             Hub de projetos
+/projetos/portal-conselho-comunidade  Projeto 1 — Portal do Conselho (SSG)
+/projetos/bia-assistente-virtual      Projeto 2 — BIA (SSG)
+/projetos/fluxus-gestao-igrejas       Projeto 3 — SaaS de igrejas (SSG)
+/contato                              Formulário + WhatsApp + Instagram + e-mail
+/api/contact                          Route Handler do formulário (única rota dinâmica)
+/politica-de-privacidade              LGPD — PENDENTE (obrigatória antes do lançamento)
 ```
+
+> Nota (implementação): os serviços ficaram detalhados em seções de `/solucoes`
+> (uma página) em vez de uma página por serviço; páginas individuais por serviço
+> permanecem como evolução de SEO. Projetos individuais usam `generateStaticParams`
+> + `dynamicParams = false`.
 
 Reservadas para o futuro (não criar agora, não conflitar): `/blog`, `/blog/[slug]`, `/lp/[campanha]`.
 
 ### 5.3 Navegação
 
 **Header (fixo, com fundo que ganha opacidade no scroll):**
-`Serviços` · `Produtos` · `Cases` · `Quem somos` · CTA destacado `Fale conosco` (amarelo — único elemento de cor cheia no header).
+`A Fluxus` · `Soluções` · `Produtos` · `Projetos` · `Contato` · CTA destacado `Fale conosco` (amarelo — único elemento de cor cheia no header).
 
 Sem dropdowns na v1 — 4 serviços não justificam a complexidade de acessibilidade de um menu suspenso. O hub `/servicos` cumpre o papel.
 
@@ -516,6 +522,13 @@ Cada diferencial segue o formato **afirmação específica + evidência demonstr
 
 **Decisão: A**, com WhatsApp como canal paralelo sempre visível. A opção B fica documentada como fallback aceitável se se quiser zero código de servidor.
 
+> **Status (implementação):** `POST /api/contact` implementado com validação
+> server-side, honeypot (resposta 200 falsa), rate limit em memória (3/h por IP)
+> e envio via Resend com fallback de desenvolvimento (sem `RESEND_API_KEY`,
+> simula e loga). Pendências: criar a chave no painel do Resend, verificar o
+> domínio (DNS no registro.br) e trocar o remetente `onboarding@resend.dev`
+> pelo institucional.
+
 ### 12.2 Especificação do formulário
 
 - Campos: nome, e-mail, telefone/WhatsApp (opcional), tipo de interesse (select: serviços/produto/consultoria — pré-selecionável via query param das páginas de origem), mensagem. Mínimo necessário — cada campo a mais reduz conversão.
@@ -555,6 +568,15 @@ Home: "empresa de tecnologia", marca. Serviços: "criação de sites institucion
 | Internas | `BreadcrumbList` |
 
 Renderização via componente `<JsonLd>` (script `application/ld+json` em Server Component). Validar com o Rich Results Test antes do lançamento.
+
+> **Status (implementação):** `Organization` implementado no root layout (com
+> endereço João Pessoa/PB e `sameAs` Instagram). `sitemap.ts` (URLs de projetos
+> geradas de `src/data`), `robots.ts`, `manifest.ts`, metadata completa com
+> template de título, OG/Twitter (imagem 1200×630 gerada da marca), canonicals
+> em todas as páginas e favicons da marca — tudo entregue na Fase 7.
+> `Service`/`SoftwareApplication`/`BreadcrumbList` ficam como evolução.
+> Headers de segurança do §17.1 implementados no `next.config.ts` (exceto CSP,
+> pendente de definição fina).
 
 ### 13.5 Open Graph / Twitter Cards
 
@@ -750,6 +772,7 @@ Implicações e configuração do Next.js em container no Railway:
 - **Container sempre ativo** (característica do Railway): sem cold start — o formulário de contato responde com latência constante.
 - **Healthcheck** configurado no Railway apontando para a raiz, garantindo deploys sem downtime (o container antigo só é substituído quando o novo responde).
 - **Boas práticas independentes de plataforma** (mantidas): build reproduzível com lockfile, headers de segurança no `next.config.ts` (§17.1), assets com cache imutável, HTTPS forçado, variáveis de ambiente fora do repositório.
+- **Dockerfile multi-stage na raiz** (implementado na Fase 8A): `node:22-alpine`, pnpm via corepack (`packageManager` fixado no `package.json`), estágio de deps com `pnpm-workspace.yaml` (aprova o build script do `sharp`), runner enxuto com usuário não-root executando `node server.js` do output standalone. `.dockerignore` exclui `node_modules`, `.next`, `.git`, `.env*` e `docs/`.
 
 ### 20.2 Domínios e DNS (gerenciados no registro.br)
 

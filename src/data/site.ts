@@ -8,8 +8,8 @@ export const site = {
   description:
     "Empresa de tecnologia: sites institucionais, sistemas web, soluções com IA, automações e consultoria.",
   email: "contato@fluxustecnologia.com.br",
-  // TODO: substituir pelo número real de WhatsApp comercial antes do lançamento
-  whatsappUrl: "https://wa.me/5583999999999",
+  whatsappUrl:
+    "https://api.whatsapp.com/send?phone=5583987954038&text=Ol%C3%A1!%20Vi%20o%20site%20da%20Fluxus%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.",
   instagram: {
     handle: "@fluxustecnologia",
     url: "https://www.instagram.com/fluxustecnologia",

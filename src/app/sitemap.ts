@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/produtos`, lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/projetos`, lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/contato`, lastModified, changeFrequency: "yearly", priority: 0.7 },
+    { url: `${BASE_URL}/politica-de-privacidade`, lastModified, changeFrequency: "yearly", priority: 0.3 },
   ];
 
   /* Projetos gerados da mesma fonte de dados das páginas — impossível
