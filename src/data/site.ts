@@ -22,10 +22,10 @@ export interface NavLink {
 }
 
 export const navigation: NavLink[] = [
-  { label: "Quem somos", href: "/quem-somos" },
-  { label: "Serviços", href: "/servicos" },
+  { label: "A Fluxus", href: "/a-fluxus" },
+  { label: "Soluções", href: "/solucoes" },
   { label: "Produtos", href: "/produtos" },
-  { label: "Cases", href: "/cases" },
+  { label: "Projetos", href: "/projetos" },
   { label: "Contato", href: "/contato" },
 ];
 
@@ -35,15 +35,22 @@ export const hero = {
   titleStatic: "Desenvolvemos",
   /** Parte rotativa do h1 — a primeira frase é a exibida com reduced motion */
   rotatingPhrases: [
-    "sites que convertem",
+    "sites que geram resultados",
     "sistemas que resolvem",
     "IA que automatiza",
     "soluções sob medida",
   ],
   subtitle:
-    "Sites institucionais, sistemas web e soluções com inteligência artificial para empresas e instituições que precisam de tecnologia sob medida — de problemas reais a resultados concretos.",
-  primaryCta: { label: "Conheça nossos cases", href: "/cases" },
+    "Transformamos ideias e desafios em sites, sistemas e soluções digitais pensadas para gerar resultados de verdade.",
+  primaryCta: { label: "Conheça nossos projetos", href: "/projetos" },
   secondaryCta: { label: "Fale conosco", href: "/contato" },
+} as const;
+
+/* ————— Home: cabeçalho da seção de soluções ————— */
+
+export const servicesSection = {
+  eyebrow: "O que fazemos",
+  title: "Tecnologia sob medida, do site institucional à automação com IA",
 } as const;
 
 /* ————— Home: Serviços (§10.2) ————— */
@@ -60,30 +67,30 @@ export const homeServices: HomeService[] = [
     number: "01",
     title: "Sites institucionais",
     description:
-      "Sites profissionais, responsivos e acessíveis, construídos para representar a instituição com credibilidade — de portais completos a presenças digitais enxutas.",
+      "Sites que passam confiança, valorizam sua marca e ajudam empresas e instituições a se apresentarem de forma profissional no digital.",
     caseRef: {
-      label: "Case real: Portal do Conselho da Comunidade JP",
-      href: "/cases",
+      label: "Projeto real: Portal do Conselho da Comunidade JP",
+      href: "/projetos",
     },
   },
   {
     number: "02",
     title: "Sistemas e aplicações web",
     description:
-      "Sistemas personalizados que partem do problema concreto da operação — cadastros, fluxos, relatórios e integrações desenhados para o seu processo, não o contrário.",
+      "Sistemas criados para resolver os desafios reais do seu dia a dia — organizando informações, facilitando tarefas e tornando o trabalho mais simples e eficiente.",
   },
   {
     number: "03",
     title: "IA e automações",
     description:
-      "Assistentes virtuais, automação de atendimento e apoio operacional com IA aplicada com escopo definido e responsabilidade.",
-    caseRef: { label: "Case real: BIA, assistente virtual", href: "/cases" },
+      "Assistentes virtuais com inteligência artificial para tirar dúvidas, agilizar atendimentos e facilitar o dia a dia de empresas e instituições.",
+    caseRef: { label: "Projeto real: BIA, assistente virtual", href: "/projetos" },
   },
   {
     number: "04",
     title: "Consultoria em tecnologia",
     description:
-      "Orientação para digitalização, estruturação de processos e escolha tecnológica — para decidir com clareza antes de investir.",
+      "Ajudamos sua empresa a organizar ideias, melhorar processos e escolher as melhores soluções antes de investir em tecnologia.",
   },
 ];
 

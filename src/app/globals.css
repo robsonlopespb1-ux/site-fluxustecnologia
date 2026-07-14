@@ -18,6 +18,11 @@
   /* Marca */
   --color-brand-500: #f5a623; /* amarelo principal — CTAs, destaques */
   --color-brand-600: #e5a000; /* dourado — hover de CTA, detalhes */
+  --color-brand-700: #b45309; /* dourado escuro — texto pequeno sobre fundo claro (AA) */
+
+  /* Superfícies claras (seções alternadas — ritmo §9.2) */
+  --color-paper: #fafafa;
+  --color-paper-line: #e4e4e4; /* hairlines sobre fundo claro */
 
   /* Texto (sobre ink-900: ~17:1, ~8:1, ~4.6:1) */
   --color-text-primary: #ffffff;
@@ -136,6 +141,120 @@
     transform, visibility;
   transition-duration: var(--transition-base);
   transition-timing-function: var(--ease-soft);
+}
+
+/* ————— Seções claras ————— */
+
+@layer components {
+  /*
+   * Inverte a paleta da seção: fundo claro, texto escuro.
+   * Sobrescreve as cores globais de parágrafo e caption, que são
+   * calibradas para fundo escuro.
+   */
+  .section-light {
+    background-color: var(--color-paper);
+    color: var(--color-ink-900);
+  }
+
+  .section-light p {
+    color: #52525b; /* ~7:1 sobre #fafafa */
+  }
+
+  .section-light .text-caption {
+    color: #6b6b6b; /* ~4.9:1 sobre #fafafa — AA para texto pequeno */
+  }
+}
+
+/* ————— Shimmer (uma passada) e cursor do typewriter ————— */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@layer components {
+  /*
+   * Reflexo de luz que percorre o texto uma vez (fill-mode forwards).
+   * Stripe DOURADO: sobre o fundo claro da seção, um flash branco seria
+   * invisível — o dourado cria contraste com o texto cinza-escuro.
+   * Especificidade dupla para vencer `.section-light .text-caption`.
+   */
+  .shimmer-run.shimmer-run {
+    background-image: linear-gradient(
+      110deg,
+      #6b6b6b 32%,
+      #b45309 44%,
+      #f5a623 50%,
+      #b45309 56%,
+      #6b6b6b 68%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 1.5s ease-in-out forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shimmer-run.shimmer-run {
+      background-image: none;
+      color: inherit;
+      animation: none;
+    }
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@layer components {
+  /*
+   * Letras energizadas: cada letra reage ao hover com glow dourado e
+   * espalha um glow mais fraco para as vizinhas (`+` pega a seguinte,
+   * `:has(+ :hover)` pega a anterior).
+   */
+  .energize-letter {
+    display: inline-block;
+    transition:
+      color 300ms var(--ease-soft),
+      text-shadow 300ms var(--ease-soft);
+  }
+
+  .energize-letter:hover {
+    color: var(--color-brand-500);
+    text-shadow:
+      0 0 12px rgb(245 166 35 / 0.6),
+      0 0 24px rgb(245 166 35 / 0.3);
+  }
+
+  .energize-letter:hover + .energize-word .energize-letter:first-child,
+  .energize-letter:hover + .energize-letter,
+  .energize-letter:has(+ .energize-letter:hover) {
+    color: var(--color-brand-600);
+    text-shadow: 0 0 10px rgb(245 166 35 / 0.35);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .energize-letter:hover,
+    .energize-letter:hover + .energize-letter,
+    .energize-letter:has(+ .energize-letter:hover) {
+      text-shadow: none;
+    }
+  }
+}
+
+@utility animate-blink {
+  animation: blink 1s step-end infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 }
 
 /* ————— Luz orbital do ícone do logo (hover) ————— */

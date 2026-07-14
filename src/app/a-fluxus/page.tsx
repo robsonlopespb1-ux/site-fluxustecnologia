@@ -1,14 +1,14 @@
 import { Container } from "@/components/ui/Container";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
-export default function ServicosPage() {
+export default function AFluxusPage() {
   return (
     <SectionWrapper>
       <Container>
-        <h1>Serviços</h1>
+        <h1>A Fluxus</h1>
         <p className="mt-6 max-w-2xl">
-          Conteúdo em construção — sites institucionais, sistemas web, IA e
-          automações, consultoria em tecnologia.
+          Conteúdo em construção — apresentação da empresa, abordagem e forma de
+          trabalhar.
         </p>
       </Container>
     </SectionWrapper>
