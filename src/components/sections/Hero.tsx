@@ -8,17 +8,24 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { cn } from "@/lib/cn";
 
 const ROTATE_INTERVAL_MS = 3000;
-const EXIT_DURATION_MS = 220;
+const SLIDE_DURATION_MS = 500;
+
+const words = hero.rotatingWords;
+/** Clone da primeira palavra no fim: o loop desliza até ela e "salta" de
+ *  volta ao início sem transição — rotação infinita sem retorno visível. */
+const columnItems = [...words, words[0]];
+const longestWord = [...words].sort((a, b) => b.length - a.length)[0];
 
 /**
- * Hero com vídeo de fundo decorativo e texto rotativo no h1.
- * Com prefers-reduced-motion: vídeo não é montado e a primeira frase fica
- * estática (§16.3).
+ * Hero com vídeo de fundo decorativo e palavra rotativa vertical no h1:
+ * "[Palavra] que funcionam." — a palavra sai por cima e a próxima entra
+ * por baixo. Com prefers-reduced-motion: vídeo não montado e título
+ * estático ("Soluções que funcionam.").
  */
 export function Hero() {
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [phraseIndex, setPhraseIndex] = useState(0);
-  const [leaving, setLeaving] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [withTransition, setWithTransition] = useState(true);
 
   useEffect(() => {
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -28,18 +35,30 @@ export function Hero() {
     return () => query.removeEventListener("change", onChange);
   }, []);
 
-  // Rotação: fade-out para cima → troca → entrada animada (keyframe word-in)
+  // Avança uma posição a cada intervalo
   useEffect(() => {
     if (reducedMotion) return;
-    const interval = window.setInterval(() => {
-      setLeaving(true);
-      window.setTimeout(() => {
-        setPhraseIndex((current) => (current + 1) % hero.rotatingPhrases.length);
-        setLeaving(false);
-      }, EXIT_DURATION_MS);
-    }, ROTATE_INTERVAL_MS);
+    const interval = window.setInterval(
+      () => setIndex((current) => current + 1),
+      ROTATE_INTERVAL_MS,
+    );
     return () => window.clearInterval(interval);
   }, [reducedMotion]);
+
+  // Ao alcançar o clone final, salta para o início sem transição
+  useEffect(() => {
+    if (index !== words.length) return;
+    const snap = window.setTimeout(() => {
+      setWithTransition(false);
+      setIndex(0);
+      window.requestAnimationFrame(() =>
+        window.requestAnimationFrame(() => setWithTransition(true)),
+      );
+    }, SLIDE_DURATION_MS + 50);
+    return () => window.clearTimeout(snap);
+  }, [index]);
+
+  const currentWord = words[index % words.length];
 
   return (
     <section
@@ -65,18 +84,43 @@ export function Hero() {
 
       <Container className="relative z-20 py-16 sm:py-20">
         <h1 className="text-display max-w-4xl">
-          {hero.titleStatic}
-          <span aria-live="polite" className="block text-brand-500">
-            <span
-              key={phraseIndex}
-              className={cn(
-                "animate-word-in inline-block transition-base",
-                leaving && "-translate-y-2 opacity-0",
-              )}
-            >
-              {hero.rotatingPhrases[phraseIndex]}
-            </span>
-          </span>
+          {reducedMotion ? (
+            <span className="text-brand-500">{hero.reducedMotionWord}</span>
+          ) : (
+            <>
+              {/* Palavra anunciada a leitores de tela sem o ticker visual */}
+              <span className="sr-only" aria-live="polite">
+                {currentWord}
+              </span>
+              <span
+                aria-hidden="true"
+                className="relative inline-block h-[1.05em] overflow-hidden align-top text-brand-500"
+              >
+                {/* Sizer invisível: trava a largura na maior palavra (sem layout shift) */}
+                <span className="invisible">{longestWord}</span>
+                <span
+                  className={cn(
+                    "absolute inset-0 flex flex-col ease-in-out",
+                    withTransition && "transition-transform duration-500",
+                  )}
+                  style={{ transform: `translateY(-${index * 100}%)` }}
+                >
+                  {columnItems.map((word, i) => (
+                    <span
+                      key={`${word}-${i}`}
+                      className={cn(
+                        "block h-full shrink-0 transition-opacity duration-500",
+                        i === index ? "opacity-100" : "opacity-0",
+                      )}
+                    >
+                      {word}
+                    </span>
+                  ))}
+                </span>
+              </span>
+            </>
+          )}{" "}
+          <span>{hero.titleSuffix}</span>
         </h1>
         <p className="mt-6 max-w-xl text-lg">{hero.subtitle}</p>
         <ScrollReveal

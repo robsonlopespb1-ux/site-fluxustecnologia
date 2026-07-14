@@ -426,17 +426,3 @@
   }
 }
 
-/* Entrada da palavra rotativa do hero (fade + slide-up) */
-@keyframes word-in {
-  from {
-    opacity: 0;
-    transform: translateY(0.35em);
-  }
-}
-
-@utility animate-word-in {
-  animation: word-in 300ms var(--ease-soft);
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-}

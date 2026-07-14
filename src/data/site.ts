@@ -32,14 +32,11 @@ export const navigation: NavLink[] = [
 /* ————— Home: Hero ————— */
 
 export const hero = {
-  titleStatic: "Desenvolvemos",
-  /** Parte rotativa do h1 — a primeira frase é a exibida com reduced motion */
-  rotatingPhrases: [
-    "sites que funcionam",
-    "sistemas que resolvem",
-    "IA que automatiza",
-    "soluções sob medida",
-  ],
+  /** Palavra rotativa do h1 (slide vertical) — "Soluções" é a exibida com
+   *  reduced motion por ser a mais abrangente. */
+  rotatingWords: ["Sites", "Sistemas", "Automações", "Soluções"],
+  reducedMotionWord: "Soluções",
+  titleSuffix: "que funcionam.",
   subtitle:
     "Transformamos ideias e desafios em sites, sistemas e soluções digitais pensadas para gerar resultados de verdade.",
   primaryCta: { label: "Conheça nossos projetos", href: "/projetos" },
