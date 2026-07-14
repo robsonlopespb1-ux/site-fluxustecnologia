@@ -205,6 +205,22 @@
   }
 }
 
+/* ————— Entrada da resposta do diagnóstico (fade-up) ————— */
+
+@keyframes diag-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@utility animate-diag-in {
+  animation: diag-in 300ms var(--ease-soft);
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
 /* ————— Marquee infinito de logos ————— */
 
 /* Move exatamente uma cópia (a faixa contém 4) — emenda invisível */
@@ -421,6 +437,52 @@
   /* Reduced motion: sem órbita — fica o glow estático intensificado */
   @media (prefers-reduced-motion: reduce) {
     .group:hover .logo-orbit::before {
+      animation: none;
+    }
+  }
+
+  /*
+   * Mesma mecânica nos cards do diagnóstico: anel de 2px com ponto de luz
+   * orbitando (reutiliza o keyframe rotate-border). Um pouco mais lento —
+   * cards são maiores que o ícone do logo.
+   */
+  .card-orbit::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: conic-gradient(
+      from var(--angle),
+      transparent 0%,
+      transparent 70%,
+      var(--color-brand-500) 75%,
+      transparent 80%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 300ms var(--ease-soft);
+    pointer-events: none;
+  }
+
+  @media (hover: hover) {
+    .card-orbit:hover::before,
+    .card-orbit-active::before {
+      opacity: 1;
+      animation: rotate-border 2.5s linear infinite;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-orbit:hover::before,
+    .card-orbit-active::before {
       animation: none;
     }
   }

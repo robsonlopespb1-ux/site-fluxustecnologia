@@ -214,6 +214,67 @@ export const cases: CaseItem[] = [
   },
 ];
 
+/* ————— Diagnóstico interativo (Home): "Não sabe por onde começar?" ————— */
+
+export interface DiagnosticOption {
+  id: string;
+  label: string;
+  icon: "globe" | "cog" | "layers" | "message" | "lightbulb" | "compass";
+  response: string;
+  cta: string;
+}
+
+export const diagnosticOptions: DiagnosticOption[] = [
+  {
+    id: "site",
+    label: "Preciso de um site profissional",
+    icon: "globe",
+    response:
+      "Um site bem construído é o cartão de visitas da sua organização. Criamos sites que passam confiança, funcionam em qualquer dispositivo e são encontrados no Google.",
+    cta: "Fale sobre seu site",
+  },
+  {
+    id: "sistema",
+    label: "Tenho processos manuais demais",
+    icon: "cog",
+    response:
+      "Se sua equipe ainda depende de planilhas, cadernos ou grupos de WhatsApp para organizar o trabalho, um sistema sob medida pode transformar a operação.",
+    cta: "Fale sobre seus processos",
+  },
+  {
+    id: "desorganizacao",
+    label: "Informações desorganizadas",
+    icon: "layers",
+    response:
+      "Dados espalhados em vários lugares geram retrabalho e decisões erradas. Podemos estruturar suas informações em um sistema que centraliza e organiza tudo.",
+    cta: "Fale sobre sua organização",
+  },
+  {
+    id: "atendimento",
+    label: "Atendimento sobrecarregado",
+    icon: "message",
+    response:
+      "Um assistente virtual com IA pode responder dúvidas frequentes, orientar cidadãos e desafogar sua equipe — 24 horas por dia, sem fila.",
+    cta: "Fale sobre seu atendimento",
+  },
+  {
+    id: "ideia",
+    label: "Tenho uma ideia de sistema",
+    icon: "lightbulb",
+    response:
+      "Ideias precisam de estrutura para virar produto. Ajudamos a validar, planejar a arquitetura e construir do zero — com tecnologia que escala.",
+    cta: "Fale sobre sua ideia",
+  },
+  {
+    id: "perdido",
+    label: "Não sei por onde começar",
+    icon: "compass",
+    response:
+      "Tudo bem. A maioria dos nossos projetos começa assim. Uma conversa de 15 minutos já é suficiente para entendermos sua necessidade e sugerir um caminho.",
+    cta: "Vamos conversar",
+  },
+];
+
 /* ————— Marquee de projetos/clientes (Home) ————— */
 
 export interface ClientProject {

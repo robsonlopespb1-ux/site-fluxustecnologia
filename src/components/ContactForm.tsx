@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/cn";
 
@@ -13,12 +14,27 @@ const SUBJECT_OPTIONS = [
   "Outro",
 ];
 
+/* Mapeia o query param ?assunto= (vindo do diagnóstico da Home) */
+const SUBJECT_BY_PARAM: Record<string, string> = {
+  site: "Site institucional",
+  sistema: "Sistema web",
+  desorganizacao: "Sistema web",
+  atendimento: "Inteligência Artificial",
+  ideia: "Outro",
+  perdido: "Outro",
+};
+
 const inputClasses =
   "w-full rounded-lg border border-paper-line bg-white px-4 py-3 text-sm text-ink-900 " +
   "placeholder:text-[#8c8c8c] transition-base focus:border-brand-500 focus:outline-none " +
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500";
 
 export function ContactForm() {
+  const searchParams = useSearchParams();
+  const assuntoParam = searchParams.get("assunto");
+  const [subject, setSubject] = useState(
+    () => (assuntoParam && SUBJECT_BY_PARAM[assuntoParam]) || SUBJECT_OPTIONS[0],
+  );
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -102,7 +118,13 @@ export function ContactForm() {
           <label htmlFor="contact-subject" className="mb-2 block text-sm font-medium">
             Assunto
           </label>
-          <select id="contact-subject" name="subject" className={inputClasses}>
+          <select
+            id="contact-subject"
+            name="subject"
+            value={subject}
+            onChange={(event) => setSubject(event.target.value)}
+            className={inputClasses}
+          >
             {SUBJECT_OPTIONS.map((option) => (
               <option key={option} value={option}>
                 {option}

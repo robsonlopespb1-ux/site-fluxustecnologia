@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { site } from "@/data/site";
 import { ContactForm } from "@/components/ContactForm";
 import { Container } from "@/components/ui/Container";
@@ -54,7 +55,10 @@ export default function ContatoPage() {
             <ScrollReveal className="lg:col-span-7">
               <h2 className="text-2xl">Envie sua mensagem</h2>
               <div className="mt-8">
-                <ContactForm />
+                {/* useSearchParams no form exige Suspense em página estática */}
+                <Suspense fallback={null}>
+                  <ContactForm />
+                </Suspense>
               </div>
             </ScrollReveal>
 
