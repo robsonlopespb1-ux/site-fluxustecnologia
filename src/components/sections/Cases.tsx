@@ -2,6 +2,7 @@ import Link from "next/link";
 import { cases } from "@/data/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { EnergizedText } from "@/components/ui/EnergizedText";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
@@ -18,10 +19,11 @@ export function Cases() {
       <Container>
         <div className="max-w-2xl">
           <p className="text-caption uppercase tracking-widest">Projetos reais</p>
-          <h2 className="mt-4">
-            Cada projeto nasce de um problema real e entrega uma solução que
-            funciona
-          </h2>
+          <EnergizedText
+            as="h2"
+            className="mt-4"
+            text="Cada projeto nasce de um problema real e entrega uma solução que funciona"
+          />
         </div>
 
         {/* Case em destaque */}

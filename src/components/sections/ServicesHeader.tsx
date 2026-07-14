@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { servicesSection } from "@/data/site";
+import { EnergizedText } from "@/components/ui/EnergizedText";
 import { cn } from "@/lib/cn";
 
 const TYPE_SPEED_MS = 45;
@@ -82,23 +83,9 @@ export function ServicesHeader() {
         </span>
         <span aria-hidden="true" className="absolute inset-0">
           {interactive ? (
-            /* Terminada a digitação, cada letra reage ao hover (glow dourado).
-               Palavras em spans inline-block preservam a quebra de linha
-               responsiva — nbsp em todos os espaços impediria o texto de
-               quebrar no mobile. */
+            /* Terminada a digitação, cada letra reage ao hover (glow dourado). */
             <>
-              {title.split(" ").map((word, wordIndex) => (
-                <span key={wordIndex}>
-                  {wordIndex > 0 && " "}
-                  <span className="energize-word inline-block">
-                    {word.split("").map((char, charIndex) => (
-                      <span key={charIndex} className="energize-letter">
-                        {char}
-                      </span>
-                    ))}
-                  </span>
-                </span>
-              ))}
+              <EnergizedText as="span" text={title} />
               {visible && !reducedMotion && !cursorGone && (
                 <span className="animate-blink ml-0.5 inline-block font-light">
                   |
