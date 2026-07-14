@@ -26,6 +26,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${inter.variable} dark h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        {/* Sem JS, nenhum conteúdo fica escondido atrás do reveal (§16.3) */}
+        <noscript>
+          <style>{`.scroll-reveal{opacity:1 !important;transform:none !important}`}</style>
+        </noscript>
         <ScrollProgress />
         <Header />
         <main className="flex flex-1 flex-col">{children}</main>

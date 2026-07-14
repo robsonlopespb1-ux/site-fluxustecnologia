@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { hero } from "@/data/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { cn } from "@/lib/cn";
 
 const ROTATE_INTERVAL_MS = 3000;
@@ -78,7 +79,10 @@ export function Hero() {
           </span>
         </h1>
         <p className="mt-6 max-w-xl text-lg">{hero.subtitle}</p>
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
+        <ScrollReveal
+          delay={300}
+          className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4"
+        >
           <Button href={hero.primaryCta.href} size="lg" className="w-full sm:w-auto">
             {hero.primaryCta.label}
           </Button>
@@ -90,7 +94,7 @@ export function Hero() {
           >
             {hero.secondaryCta.label}
           </Button>
-        </div>
+        </ScrollReveal>
       </Container>
     </section>
   );

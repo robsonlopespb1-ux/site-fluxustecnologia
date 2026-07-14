@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { EnergizedText } from "@/components/ui/EnergizedText";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 /**
@@ -17,16 +18,17 @@ export function Cases() {
   return (
     <SectionWrapper id="cases" className="section-light">
       <Container>
-        <div className="max-w-2xl">
+        <ScrollReveal className="max-w-2xl">
           <p className="text-caption uppercase tracking-widest">Projetos reais</p>
           <EnergizedText
             as="h2"
             className="mt-4"
             text="Cada projeto nasce de um problema real e entrega uma solução que funciona"
           />
-        </div>
+        </ScrollReveal>
 
         {/* Case em destaque */}
+        <ScrollReveal animation="scale-in" delay={200}>
         <article className="mt-14 grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
           <figure className="overflow-hidden rounded-xl border border-paper-line bg-white p-2 shadow-[0_20px_50px_-20px_rgba(13,13,13,0.25)] sm:p-3 lg:col-span-7">
             <ImageCarousel
@@ -67,14 +69,13 @@ export function Cases() {
             )}
           </div>
         </article>
+        </ScrollReveal>
 
         {/* Demais cases — carrossel fica clicável acima do link esticado */}
         <div className="mt-14 grid gap-6 sm:grid-cols-2">
-          {others.map((item) => (
-            <article
-              key={item.slug}
-              className="group relative overflow-hidden rounded-xl border border-paper-line bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-500/40 hover:shadow-[0_16px_40px_-18px_rgba(13,13,13,0.3)]"
-            >
+          {others.map((item, index) => (
+            <ScrollReveal key={item.slug} delay={index * 150}>
+            <article className="group relative overflow-hidden rounded-xl border border-paper-line bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-500/40 hover:shadow-[0_16px_40px_-18px_rgba(13,13,13,0.3)]">
               <div className="border-b border-paper-line bg-[#f0f0f0]">
                 <ImageCarousel
                   images={item.images}
@@ -93,6 +94,7 @@ export function Cases() {
                 <p className="mt-3 text-sm">{item.description}</p>
               </div>
             </article>
+            </ScrollReveal>
           ))}
         </div>
       </Container>

@@ -1,5 +1,6 @@
 import { differentials } from "@/data/site";
 import { Container } from "@/components/ui/Container";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 /**
@@ -12,21 +13,26 @@ export function Differentials() {
       <Container>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
+            {/* Reveal dentro do wrapper sticky — não interfere no range do sticky */}
             <div className="lg:sticky lg:top-24">
-              <p className="text-caption uppercase tracking-widest text-brand-500">
-                Por que a Fluxus
-              </p>
-              <h2 className="mt-4">
-                O que sustenta cada projeto que entregamos
-              </h2>
+              <ScrollReveal animation="fade-left">
+                <p className="text-caption uppercase tracking-widest text-brand-500">
+                  Por que a Fluxus
+                </p>
+                <h2 className="mt-4">
+                  O que sustenta cada projeto que entregamos
+                </h2>
+              </ScrollReveal>
             </div>
           </div>
 
           <ul className="lg:col-span-8">
-            {differentials.map((item) => (
-              <li
+            {differentials.map((item, index) => (
+              <ScrollReveal
+                as="li"
                 key={item.number}
-                className="border-t border-line py-8 pl-5 transition-all duration-300 [border-left:2px_solid_transparent] first:border-t-line last:border-b last:border-b-line hover:[border-left-color:var(--color-brand-500)] lg:py-10"
+                delay={index * 150}
+                className="border-t border-line py-8 pl-5 [border-left:2px_solid_transparent] first:border-t-line last:border-b last:border-b-line hover:[border-left-color:var(--color-brand-500)] lg:py-10"
               >
                 <div className="flex items-baseline gap-4">
                   <span
@@ -40,7 +46,7 @@ export function Differentials() {
                     <p className="mt-3 max-w-xl">{item.description}</p>
                   </div>
                 </div>
-              </li>
+              </ScrollReveal>
             ))}
           </ul>
         </div>

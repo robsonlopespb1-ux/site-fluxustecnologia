@@ -165,6 +165,46 @@
   }
 }
 
+/* ————— Reveal on scroll (§16.2) ————— */
+
+@layer components {
+  .scroll-reveal {
+    opacity: 0;
+    transition-property: opacity, transform;
+    transition-timing-function: var(--ease-soft);
+  }
+
+  .scroll-reveal-up {
+    transform: translateY(30px);
+  }
+
+  .scroll-reveal-left {
+    transform: translateX(-30px);
+  }
+
+  .scroll-reveal-right {
+    transform: translateX(30px);
+  }
+
+  .scroll-reveal-scale {
+    transform: scale(0.95);
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Conteúdo nunca depende da animação para aparecer (§16.3) */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+}
+
 /* ————— Shimmer (uma passada) e cursor do typewriter ————— */
 
 @keyframes shimmer {

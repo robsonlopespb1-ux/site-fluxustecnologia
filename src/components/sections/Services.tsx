@@ -3,6 +3,7 @@ import { homeServices } from "@/data/site";
 import { ServicesHeader } from "@/components/sections/ServicesHeader";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 /**
@@ -18,9 +19,13 @@ export function Services() {
 
         <ul className="mt-14 flex flex-col gap-6 lg:gap-8">
           {homeServices.map((service, i) => (
-            <li
+            /* Reveal aplicado no PRÓPRIO li sticky: um wrapper anularia o
+               range de rolagem do position:sticky. */
+            <ScrollReveal
+              as="li"
               key={service.number}
-              className="group sticky rounded-xl border border-paper-line bg-white p-7 shadow-[0_-8px_24px_-16px_rgba(13,13,13,0.2),0_16px_40px_-20px_rgba(13,13,13,0.25)] transition-colors duration-300 hover:border-brand-500/40 sm:p-9 lg:p-12"
+              delay={i * 150}
+              className="group sticky rounded-xl border border-paper-line bg-white p-7 shadow-[0_-8px_24px_-16px_rgba(13,13,13,0.2),0_16px_40px_-20px_rgba(13,13,13,0.25)] hover:border-brand-500/40 sm:p-9 lg:p-12"
               style={{
                 top: `calc(4.5rem + ${i} * 1.25rem)`,
                 zIndex: 10 * (i + 1),
@@ -49,7 +54,7 @@ export function Services() {
                   )}
                 </div>
               </div>
-            </li>
+            </ScrollReveal>
           ))}
         </ul>
 
