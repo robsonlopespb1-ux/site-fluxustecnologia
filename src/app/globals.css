@@ -205,6 +205,72 @@
   }
 }
 
+/* ————— Marquee infinito de logos ————— */
+
+/* Move exatamente uma cópia (a faixa contém 4) — emenda invisível */
+@keyframes marquee {
+  to {
+    transform: translateX(-25%);
+  }
+}
+
+@layer components {
+  .marquee {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Fade lateral: logos surgem/desaparecem suavemente nas bordas */
+  .marquee::before,
+  .marquee::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 60px;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .marquee::before {
+    left: 0;
+    background: linear-gradient(to right, #ffffff, transparent);
+  }
+
+  .marquee::after {
+    right: 0;
+    background: linear-gradient(to left, #ffffff, transparent);
+  }
+
+  @media (width >= 1024px) {
+    .marquee::before,
+    .marquee::after {
+      width: 100px;
+    }
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee var(--marquee-duration, 28s) linear infinite;
+  }
+
+  /* Pausa para permitir o clique com calma */
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+    /* Estático, com scroll horizontal quando não couber */
+    .marquee {
+      overflow-x: auto;
+    }
+  }
+}
+
 /* ————— Shimmer (uma passada) e cursor do typewriter ————— */
 
 @keyframes shimmer {

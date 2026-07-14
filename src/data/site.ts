@@ -217,6 +217,37 @@ export const cases: CaseItem[] = [
   },
 ];
 
+/* ————— Marquee de projetos/clientes (Home) ————— */
+
+export interface ClientProject {
+  name: string;
+  url: string;
+  logo: string;
+}
+
+export const clientProjects: ClientProject[] = [
+  {
+    name: "Escritório Social",
+    url: "https://www.portalescritoriosocial.com.br",
+    logo: "/images/logos-clientes/escritorio-social.png",
+  },
+  {
+    name: "Atendimento à Pessoa Custodiada",
+    url: "https://www.apecpb.com.br",
+    logo: "/images/logos-clientes/audiencias-de-custodia.png",
+  },
+  {
+    name: "Conselho da Comunidade",
+    url: "https://www.conselhodacomunidadejp.com.br",
+    logo: "/images/logos-clientes/conselho-da-comunidade.png",
+  },
+  {
+    name: "Fluxus Igrejas",
+    url: "https://igrejas.fluxustecnologia.com.br",
+    logo: "/images/logos-clientes/fluxus-igrejas.png",
+  },
+];
+
 /* ————— Diferenciais (§10.5) — específicos e demonstráveis ————— */
 
 export interface Differential {
