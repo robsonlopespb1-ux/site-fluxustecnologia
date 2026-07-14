@@ -10,9 +10,10 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { cn } from "@/lib/cn";
 
 export const metadata: Metadata = {
-  title: "Projetos | Fluxus Tecnologia",
+  title: "Projetos",
   description:
     "Projetos reais desenvolvidos pela Fluxus Tecnologia. Portais institucionais, assistentes com IA e plataformas SaaS.",
+  alternates: { canonical: "/projetos" },
 };
 
 export default function ProjetosPage() {

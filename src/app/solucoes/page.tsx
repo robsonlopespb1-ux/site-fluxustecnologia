@@ -10,9 +10,10 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { cn } from "@/lib/cn";
 
 export const metadata: Metadata = {
-  title: "Soluções | Fluxus Tecnologia",
+  title: "Soluções",
   description:
     "Sites institucionais, sistemas web, inteligência artificial e consultoria em tecnologia. Soluções digitais sob medida para sua organização.",
+  alternates: { canonical: "/solucoes" },
 };
 
 interface Solution {

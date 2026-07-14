@@ -9,9 +9,10 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 export const metadata: Metadata = {
-  title: "Produtos | Fluxus Tecnologia",
+  title: "Produtos",
   description:
     "Produtos digitais próprios da Fluxus Tecnologia. Conheça o Fluxus Gestão para Igrejas — plataforma SaaS modular.",
+  alternates: { canonical: "/produtos" },
 };
 
 const productModules = [

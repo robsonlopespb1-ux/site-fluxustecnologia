@@ -24,8 +24,9 @@ export async function generateMetadata({
   const item = cases.find((c) => c.slug === slug);
   if (!item) return {};
   return {
-    title: `${item.name} | Projetos | Fluxus Tecnologia`,
+    title: item.name,
     description: item.description,
+    alternates: { canonical: `/projetos/${slug}` },
   };
 }
 

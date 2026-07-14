@@ -17,7 +17,7 @@ export function Footer() {
 
           {/* Navegação */}
           <nav aria-label="Rodapé">
-            <h4 className="mb-4 text-caption uppercase tracking-wider">Navegação</h4>
+            <h2 className="mb-4 text-caption uppercase tracking-wider">Navegação</h2>
             <ul className="flex flex-col gap-3">
               {navigation.map((link) => (
                 <li key={link.href}>
@@ -34,7 +34,7 @@ export function Footer() {
 
           {/* Contato */}
           <address className="not-italic">
-            <h4 className="mb-4 text-caption uppercase tracking-wider">Contato</h4>
+            <h2 className="mb-4 text-caption uppercase tracking-wider">Contato</h2>
             <ul className="flex flex-col gap-3">
               <li>
                 <a

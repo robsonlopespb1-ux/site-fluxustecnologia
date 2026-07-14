@@ -8,9 +8,10 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 export const metadata: Metadata = {
-  title: "Contato | Fluxus Tecnologia",
+  title: "Contato",
   description:
     "Entre em contato com a Fluxus Tecnologia. Formulário, WhatsApp e Instagram.",
+  alternates: { canonical: "/contato" },
 };
 
 const channels = [

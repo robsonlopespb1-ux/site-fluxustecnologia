@@ -7,9 +7,10 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 export const metadata: Metadata = {
-  title: "A Fluxus | Fluxus Tecnologia",
+  title: "A Fluxus",
   description:
     "Conheça a Fluxus Tecnologia — empresa de soluções digitais em João Pessoa/PB. Sites, sistemas, IA e consultoria para organizações que precisam de tecnologia sob medida.",
+  alternates: { canonical: "/a-fluxus" },
 };
 
 const processSteps = [
