@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { site } from "@/data/site";
+import { buildContactEmailHtml } from "@/lib/email-template";
 
 /**
  * Envio do formulário de contato (docs/ARQUITETURA.md §12):
@@ -96,12 +97,12 @@ export async function POST(request: Request) {
     const { Resend } = await import("resend");
     const resend = new Resend(apiKey);
     const { error } = await resend.emails.send({
-      // TODO: trocar para contato@fluxustecnologia.com.br após verificar o
-      // domínio no Resend (registros DNS no registro.br — §20.2)
-      from: "Site Fluxus <onboarding@resend.dev>",
+      // Requer domínio verificado no Resend (registros DNS no registro.br — §20.2)
+      from: `Fluxus Tecnologia <${site.email}>`,
       to: site.email,
       replyTo: email,
-      subject: `[Site] ${singleLine(subject) || "Contato"} — ${singleLine(name)}`,
+      subject: `Novo contato pelo site — ${singleLine(subject) || "Outro"}`,
+      html: buildContactEmailHtml({ name, email, phone, subject, message }),
       text: emailText,
     });
     if (error) {
