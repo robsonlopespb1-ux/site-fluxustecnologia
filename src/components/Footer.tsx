@@ -92,15 +92,15 @@ export function Footer() {
 
           {/* Pagamento */}
           <div className="mt-6 flex flex-col items-start gap-4 border-t border-line pt-6 sm:flex-row sm:items-center">
-            <span className="inline-flex shrink-0 items-center rounded-lg bg-white px-3 py-1.5">
-              <Image
-                src="/MP_RGB_HANDSHAKE_pluma_horizontal.png"
-                alt="Mercado Pago"
-                width={150}
-                height={61}
-                className="h-auto w-[140px]"
-              />
-            </span>
+            {/* Variante "pluma" (100% branca) — desenhada para fundo escuro;
+                nunca colocar em container branco (fica invisível) */}
+            <Image
+              src="/MP_RGB_HANDSHAKE_pluma_horizontal.png"
+              alt="Mercado Pago"
+              width={150}
+              height={61}
+              className="h-auto w-[140px] shrink-0"
+            />
             <div>
               <p className="text-xs font-medium text-text-secondary">
                 Pagamento seguro via Mercado Pago
