@@ -124,6 +124,9 @@ export default async function ProjetoPage({
                 sizes="(min-width: 1024px) 56rem, 100vw"
                 className="overflow-hidden rounded-lg"
                 dotsVariant="dark"
+                {...(item.images.length > 3
+                  ? { aspectClassName: "aspect-[1345/500]", fit: "contain" as const }
+                  : {})}
               />
             </figure>
           </ScrollReveal>

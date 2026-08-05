@@ -100,6 +100,71 @@ export interface CaseImage {
   height: number;
 }
 
+/** Screenshots reais do Fluxus Gestão para Igrejas (compartilhados entre o
+ *  case, a seção da Home e a página de produtos). */
+export const productScreenshots: CaseImage[] = [
+  {
+    src: "/images/cases/fluxus-igrejas-01.png",
+    alt: "Módulos do Fluxus Gestão para Igrejas: Ação Social, Financeiro e Louvor",
+    width: 1020,
+    height: 279,
+  },
+  {
+    src: "/images/cases/fluxus-igrejas-02.png",
+    alt: "Módulos do Fluxus Gestão para Igrejas: Pessoas, Estudo Bíblico e Ministério Infantil",
+    width: 1012,
+    height: 250,
+  },
+  {
+    src: "/images/cases/fluxus-igrejas-03.png",
+    alt: "Módulo de Eventos do Fluxus Gestão para Igrejas: cultos, congressos e retiros",
+    width: 356,
+    height: 246,
+  },
+  {
+    src: "/images/cases/fluxus-igrejas-04.png",
+    alt: "Dashboard da Ação Social com beneficiários ativos, atendimentos, projetos, voluntários e estoque",
+    width: 1344,
+    height: 514,
+  },
+  {
+    src: "/images/cases/fluxus-igrejas-05.png",
+    alt: "Visão geral do Financeiro: saldo consolidado, resultado do mês, receitas, despesas e contas a vencer",
+    width: 1347,
+    height: 548,
+  },
+  {
+    src: "/images/cases/fluxus-igrejas-06.png",
+    alt: "Painel do Louvor: bandas, músicos, escalas da semana, confirmações pendentes e repertório",
+    width: 1342,
+    height: 500,
+  },
+  {
+    src: "/images/cases/fluxus-igrejas-07.png",
+    alt: "Painel de Pessoas: membros ativos, visitantes, novos convertidos, check-ins e cultos realizados",
+    width: 1345,
+    height: 503,
+  },
+  {
+    src: "/images/cases/fluxus-igrejas-08.png",
+    alt: "Painel do Estudo Bíblico: cursos, turmas, alunos, inscrições, presenças e materiais",
+    width: 1345,
+    height: 500,
+  },
+  {
+    src: "/images/cases/fluxus-igrejas-09.png",
+    alt: "Painel do Ministério Infantil: crianças cadastradas, presenças com check-in, salas e voluntários escalados",
+    width: 1358,
+    height: 424,
+  },
+  {
+    src: "/images/cases/fluxus-igrejas-10.png",
+    alt: "Módulo de Eventos com busca, filtros, calendário, escalas e criação de novo evento",
+    width: 1365,
+    height: 514,
+  },
+];
+
 export interface CaseItem {
   slug: string;
   name: string;
@@ -178,36 +243,21 @@ export const cases: CaseItem[] = [
     organization: "Fluxus Tecnologia (produto próprio)",
     type: "Plataforma SaaS",
     description:
-      "Plataforma SaaS modular para gestão completa de igrejas — membros, financeiro, ação social, voluntários e multi-templo.",
+      "Plataforma SaaS modular para gestão de igrejas evangélicas — 7 módulos disponíveis (+1 em breve), multi-templo, controle de acesso por perfil e dashboards automáticos. Sem instalação: acesso pelo navegador.",
     features: [
-      "Gestão de membros",
-      "Financeiro completo",
-      "Ação social com distribuições",
-      "Banco de voluntários",
-      "Eventos e relatórios",
+      "Ação Social",
+      "Financeiro",
+      "Louvor",
+      "Pessoas",
+      "Estudo Bíblico",
+      "Ministério Infantil",
+      "Eventos",
+      "Relatórios & BI (em breve)",
       "Multi-templo",
+      "Acesso por perfil",
     ],
     technologies: [],
-    images: [
-      {
-        src: "/images/cases/fluxus-igrejas-acao-social.png",
-        alt: "Módulo de Ação Social do Fluxus Gestão para Igrejas, com dashboard de distribuições e estoque",
-        width: 1365,
-        height: 605,
-      },
-      {
-        src: "/images/cases/fluxus-igrejas-financeiro.png",
-        alt: "Módulo Financeiro do Fluxus Gestão para Igrejas, com visão geral de saldos, receitas e despesas",
-        width: 1363,
-        height: 602,
-      },
-      {
-        src: "/images/cases/fluxus-igrejas-site.png",
-        alt: "Página inicial do Fluxus Gestão para Igrejas, com o título “Menos burocracia. Mais Ministérios.”",
-        width: 1363,
-        height: 617,
-      },
-    ],
+    images: productScreenshots,
     externalUrl: null,
     testimonial: null,
     metrics: null,
@@ -343,37 +393,77 @@ export const differentials: Differential[] = [
 
 /* ————— Home: Produto próprio (§10.3) ————— */
 
+export interface ProductModule {
+  name: string;
+  description: string;
+  available: boolean;
+}
+
+export const productModules: ProductModule[] = [
+  {
+    name: "Ação Social",
+    description:
+      "Beneficiários, atendimentos, estoque e entregas — com assinatura no ato e comprovante em PDF.",
+    available: true,
+  },
+  {
+    name: "Financeiro",
+    description:
+      "Entradas, saídas, dízimos, campanhas e patrimônio — com prestação de contas pronta.",
+    available: true,
+  },
+  {
+    name: "Louvor",
+    description:
+      "Escalas que o músico confirma pelo celular, repertório com cifra e ensaios organizados.",
+    available: true,
+  },
+  {
+    name: "Pessoas",
+    description:
+      "Visitantes, membros e presença — do primeiro domingo ao acompanhamento pastoral.",
+    available: true,
+  },
+  {
+    name: "Estudo Bíblico",
+    description:
+      "Cursos e turmas com matrícula online, presença por QR Code e controle de vagas.",
+    available: true,
+  },
+  {
+    name: "Ministério Infantil",
+    description:
+      "Check-in e check-out com código de segurança, ficha de saúde e escala de voluntários.",
+    available: true,
+  },
+  {
+    name: "Eventos",
+    description:
+      "Do cadastro à entrada: inscrições por QR Code, ingresso digital, check-in, escalas e relatórios.",
+    available: true,
+  },
+  {
+    name: "Relatórios & BI",
+    description: "Business intelligence e análise avançada de dados.",
+    available: false,
+  },
+];
+
 export const product = {
   badge: "Produto próprio",
   name: "Fluxus Gestão para Igrejas",
   description:
-    "Plataforma SaaS modular para a gestão completa da igreja — do cadastro de membros ao financeiro, com suporte a múltiplos templos.",
-  modules: [
-    "Gestão de membros",
-    "Financeiro",
-    "Ação social",
-    "Voluntários",
-    "Multi-templo",
+    "Plataforma modular criada para simplificar a gestão de igrejas evangélicas. Cada módulo resolve um problema real do dia a dia — desde o controle de membros até a gestão financeira, passando por ação social, louvor, eventos e muito mais.",
+  /** Fatos do produto real — não inventar além disto */
+  facts: [
+    "7 módulos disponíveis + 1 em breve",
+    "Multi-templo: gestão de múltiplos templos em uma plataforma",
+    "Controle de acesso por perfil",
+    "Dashboards e indicadores automáticos",
+    "Sem instalação — acesso pelo navegador",
   ],
+  pricing: "Planos a partir de R$ 49,99/mês",
+  modules: productModules,
   cta: { label: "Conhecer o produto", href: "/produtos" },
-  screenshots: [
-    {
-      src: "/images/cases/fluxus-igrejas-site.png",
-      alt: "Página inicial do Fluxus Gestão para Igrejas, com o título “Menos burocracia. Mais Ministérios.”",
-      width: 1363,
-      height: 617,
-    },
-    {
-      src: "/images/cases/fluxus-igrejas-financeiro.png",
-      alt: "Módulo Financeiro do Fluxus Gestão para Igrejas, com visão geral de saldos, receitas e despesas",
-      width: 1363,
-      height: 602,
-    },
-    {
-      src: "/images/cases/fluxus-igrejas-acao-social.png",
-      alt: "Módulo de Ação Social do Fluxus Gestão para Igrejas, com dashboard de distribuições e estoque",
-      width: 1365,
-      height: 605,
-    },
-  ],
+  screenshots: productScreenshots,
 } as const;

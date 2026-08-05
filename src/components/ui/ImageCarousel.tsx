@@ -20,6 +20,8 @@ interface ImageCarouselProps {
   intervalMs?: number;
   /** Cor das bolinhas inativas conforme o fundo da seção. */
   dotsVariant?: "light" | "dark";
+  /** "contain" para conjuntos com proporções heterogêneas (letterbox no fundo). */
+  fit?: "cover" | "contain";
 }
 
 /**
@@ -34,6 +36,7 @@ export function ImageCarousel({
   className,
   intervalMs = 4000,
   dotsVariant = "light",
+  fit = "cover",
 }: ImageCarouselProps) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -81,7 +84,8 @@ export function ImageCarousel({
             fill
             sizes={sizes}
             className={cn(
-              "object-cover object-top transition-opacity duration-500",
+              "transition-opacity duration-500",
+              fit === "cover" ? "object-cover object-top" : "object-contain",
               i === index ? "opacity-100" : "opacity-0",
             )}
             aria-hidden={i !== index}

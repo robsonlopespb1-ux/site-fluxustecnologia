@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { cases, site } from "@/data/site";
+import { product, productScreenshots, site } from "@/data/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { EnergizedText } from "@/components/ui/EnergizedText";
@@ -15,40 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/produtos" },
 };
 
-const productModules = [
-  {
-    name: "Gestão de Membros",
-    description: "Cadastro completo, visitantes, novos convertidos, check-in e acompanhamento.",
-  },
-  {
-    name: "Financeiro",
-    description: "Contas, lançamentos, dízimos, ofertas, relatórios e fluxo de caixa.",
-  },
-  {
-    name: "Ação Social",
-    description: "Beneficiários, distribuições, estoque, projetos sociais e voluntários.",
-  },
-  {
-    name: "Banco de Voluntários",
-    description: "Cadastro, disponibilidade, escalas e acompanhamento.",
-  },
-  {
-    name: "Eventos",
-    description: "Planejamento, inscrições e gestão de eventos da igreja.",
-  },
-  {
-    name: "Relatórios e Indicadores",
-    description: "Dashboards, relatórios em PDF/Excel e indicadores de gestão.",
-  },
-  {
-    name: "Multi-templo",
-    description: "Gestão centralizada de múltiplos templos em uma única plataforma.",
-  },
-];
-
 export default function ProdutosPage() {
-  const productCase = cases.find((item) => item.slug === "fluxus-gestao-igrejas");
-
   return (
     <>
       <PageHero
@@ -70,26 +37,31 @@ export default function ProdutosPage() {
               Produto próprio · SaaS
             </span>
             <EnergizedText as="h2" className="mt-6" text="Fluxus Gestão para Igrejas" />
-            <p className="mt-5">
-              Plataforma modular criada para simplificar a gestão de igrejas.
-              Cada módulo foi pensado para resolver um problema real do dia a
-              dia — desde o controle de membros até a gestão financeira
-              completa, passando por ação social, voluntários e eventos.
-            </p>
+            <p className="mt-5">{product.description}</p>
+            <ul className="mt-6 flex flex-wrap gap-2">
+              {product.facts.map((fact) => (
+                <li
+                  key={fact}
+                  className="rounded-full border border-paper-line bg-white px-3 py-1 text-xs text-[#52525b]"
+                >
+                  {fact}
+                </li>
+              ))}
+            </ul>
           </ScrollReveal>
 
           {/* Screenshots reais */}
-          {productCase && (
-            <ScrollReveal delay={200} className="mt-12">
-              <figure className="overflow-hidden rounded-xl border border-paper-line bg-white p-2 shadow-[0_20px_50px_-20px_rgba(13,13,13,0.25)] sm:p-3">
-                <ImageCarousel
-                  images={productCase.images}
-                  sizes="(min-width: 1024px) 80rem, 100vw"
-                  className="overflow-hidden rounded-lg pb-1"
-                />
-              </figure>
-            </ScrollReveal>
-          )}
+          <ScrollReveal delay={200} className="mt-12">
+            <figure className="overflow-hidden rounded-xl border border-paper-line bg-white p-2 shadow-[0_20px_50px_-20px_rgba(13,13,13,0.25)] sm:p-3">
+              <ImageCarousel
+                images={productScreenshots}
+                sizes="(min-width: 1024px) 80rem, 100vw"
+                aspectClassName="aspect-[1345/500]"
+                fit="contain"
+                className="overflow-hidden rounded-lg pb-1"
+              />
+            </figure>
+          </ScrollReveal>
 
           {/* Módulos */}
           <ScrollReveal delay={100} className="mt-16">
@@ -98,13 +70,20 @@ export default function ProdutosPage() {
             </h3>
           </ScrollReveal>
           <div className="mt-8 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {productModules.map((module, index) => (
+            {product.modules.map((module, index) => (
               <ScrollReveal key={module.name} delay={index * 80}>
                 <span
                   aria-hidden="true"
                   className="block size-2 rounded-sm bg-brand-500"
                 />
-                <h4 className="mt-3">{module.name}</h4>
+                <div className="mt-3 flex items-center gap-2">
+                  <h4>{module.name}</h4>
+                  {!module.available && (
+                    <span className="rounded-full border border-brand-700/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-brand-700">
+                      Em breve
+                    </span>
+                  )}
+                </div>
                 <p className="mt-2 text-sm">{module.description}</p>
               </ScrollReveal>
             ))}
@@ -117,9 +96,7 @@ export default function ProdutosPage() {
               </Button>
               {/* [CONTEÚDO PENDENTE] trocar pelo link do subdomínio
                   igrejas.fluxustecnologia.com.br quando o produto estiver no ar */}
-              <p className="text-sm">
-                Produto em desenvolvimento — em breve em domínio próprio.
-              </p>
+              <p className="text-sm font-medium text-ink-900">{product.pricing}</p>
             </div>
           </ScrollReveal>
         </Container>

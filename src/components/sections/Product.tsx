@@ -1,17 +1,17 @@
-import Image from "next/image";
 import { product } from "@/data/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { ImageCarousel } from "@/components/ui/ImageCarousel";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 /**
  * Produto próprio — tratamento visual distinto de serviços (§5.1/§10.3):
- * fundo ink-950, badge de produto e screenshots reais em moldura de browser.
+ * fundo ink-950, badge de produto e screenshots reais em carrossel dentro
+ * de moldura de browser. fit="contain": os screenshots têm proporções
+ * heterogêneas (banners largos + telas).
  */
 export function Product() {
-  const [main, ...thumbs] = product.screenshots;
-
   return (
     <SectionWrapper id="produto" className="border-y border-line bg-ink-950">
       <Container>
@@ -29,17 +29,26 @@ export function Product() {
             </ScrollReveal>
 
             <ScrollReveal delay={200}>
-              <ul className="mt-8 grid max-w-md grid-cols-1 gap-3 sm:grid-cols-2">
-                {product.modules.map((moduleName) => (
-                  <li
-                    key={moduleName}
-                    className="flex items-center gap-2.5 text-sm text-text-secondary"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="size-1.5 shrink-0 rounded-sm bg-brand-500"
-                    />
-                    {moduleName}
+              <ul className="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+                {product.modules.map((module) => (
+                  <li key={module.name}>
+                    <div className="flex items-center gap-2.5">
+                      <span
+                        aria-hidden="true"
+                        className="size-1.5 shrink-0 rounded-sm bg-brand-500"
+                      />
+                      <span className="text-sm font-semibold text-text-primary">
+                        {module.name}
+                      </span>
+                      {!module.available && (
+                        <span className="rounded-full border border-brand-500/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-brand-500">
+                          Em breve
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1 pl-4 text-xs leading-relaxed">
+                      {module.description}
+                    </p>
                   </li>
                 ))}
               </ul>
@@ -52,43 +61,28 @@ export function Product() {
             </ScrollReveal>
           </div>
 
-          {/* Screenshots reais em moldura de browser (composta em CSS — §7.3) */}
+          {/* Screenshots reais em carrossel, moldura de browser em CSS (§7.3) */}
           <div>
             <ScrollReveal animation="fade-right" delay={300}>
-            <figure className="overflow-hidden rounded-xl border border-line bg-ink-800 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6),0_0_55px_rgba(245,166,35,0.1)] transition-shadow duration-300 hover:shadow-[0_32px_70px_-12px_rgba(0,0,0,0.7),0_0_70px_rgba(245,166,35,0.14)]">
-              <div
-                aria-hidden="true"
-                className="flex items-center gap-1.5 border-b border-line px-4 py-3"
-              >
-                <span className="size-2.5 rounded-full bg-ink-700" />
-                <span className="size-2.5 rounded-full bg-ink-700" />
-                <span className="size-2.5 rounded-full bg-ink-700" />
-              </div>
-              <Image
-                src={main.src}
-                alt={main.alt}
-                width={main.width}
-                height={main.height}
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="w-full"
-              />
-            </figure>
+              <figure className="overflow-hidden rounded-xl border border-line bg-ink-800 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6),0_0_55px_rgba(245,166,35,0.1)] transition-shadow duration-300 hover:shadow-[0_32px_70px_-12px_rgba(0,0,0,0.7),0_0_70px_rgba(245,166,35,0.14)]">
+                <div
+                  aria-hidden="true"
+                  className="flex items-center gap-1.5 border-b border-line px-4 py-3"
+                >
+                  <span className="size-2.5 rounded-full bg-ink-700" />
+                  <span className="size-2.5 rounded-full bg-ink-700" />
+                  <span className="size-2.5 rounded-full bg-ink-700" />
+                </div>
+                <ImageCarousel
+                  images={product.screenshots}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  aspectClassName="aspect-[1345/500]"
+                  fit="contain"
+                  dotsVariant="dark"
+                  className="pb-3"
+                />
+              </figure>
             </ScrollReveal>
-
-            <div className="mt-4 grid grid-cols-2 gap-4">
-              {thumbs.map((shot, i) => (
-                <ScrollReveal key={shot.src} delay={400 + i * 100}>
-                  <Image
-                    src={shot.src}
-                    alt={shot.alt}
-                    width={shot.width}
-                    height={shot.height}
-                    sizes="(min-width: 1024px) 25vw, 50vw"
-                    className="w-full rounded-lg border border-line transition-transform duration-300 hover:scale-105"
-                  />
-                </ScrollReveal>
-              ))}
-            </div>
           </div>
         </div>
       </Container>
