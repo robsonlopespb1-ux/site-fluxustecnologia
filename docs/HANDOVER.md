@@ -22,7 +22,7 @@
 | Core message | "**[Sites/Sistemas/Automações/Soluções] que funcionam.**" — soluções a partir de problemas reais |
 | Instagram | [@fluxustecnologia](https://www.instagram.com/fluxustecnologia) |
 | E-mail | contato@fluxustecnologia.com.br |
-| WhatsApp | +55 83 98795-4038 (link com mensagem pré-preenchida em `site.ts`) |
+| WhatsApp | +55 83 99378-0710 (link com mensagem pré-preenchida em `site.ts`) |
 
 ## 2. Stack tecnológica
 
