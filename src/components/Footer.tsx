@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { navigation, site } from "@/data/site";
 import { Container } from "@/components/ui/Container";
@@ -72,16 +73,43 @@ export function Footer() {
           </address>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-caption">
-            © {new Date().getFullYear()} {site.name}. Todos os direitos reservados.
+        <div className="mt-12 border-t border-line pt-6">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-caption">
+              © {new Date().getFullYear()} {site.name}. Todos os direitos
+              reservados.
+            </p>
+            <Link
+              href="/politica-de-privacidade"
+              className="text-caption transition-base hover:text-text-secondary"
+            >
+              Política de Privacidade
+            </Link>
+          </div>
+          <p className="mt-2 text-xs text-white/40">
+            {site.razaoSocial} · CNPJ {site.cnpj} · {site.cidade}
           </p>
-          <Link
-            href="/politica-de-privacidade"
-            className="text-caption transition-base hover:text-text-secondary"
-          >
-            Política de Privacidade
-          </Link>
+
+          {/* Pagamento */}
+          <div className="mt-6 flex flex-col items-start gap-4 border-t border-line pt-6 sm:flex-row sm:items-center">
+            <span className="inline-flex shrink-0 items-center rounded-lg bg-white px-3 py-1.5">
+              <Image
+                src="/MP_RGB_HANDSHAKE_pluma_horizontal.png"
+                alt="Mercado Pago"
+                width={150}
+                height={61}
+                className="h-auto w-[140px]"
+              />
+            </span>
+            <div>
+              <p className="text-xs font-medium text-text-secondary">
+                Pagamento seguro via Mercado Pago
+              </p>
+              <p className="mt-0.5 text-xs text-white/40">
+                PIX, boleto ou cartão de crédito.
+              </p>
+            </div>
+          </div>
         </div>
       </Container>
     </footer>

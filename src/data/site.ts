@@ -5,6 +5,9 @@
 
 export const site = {
   name: "Fluxus Tecnologia",
+  razaoSocial: "FLUXUS TECNOLOGIA LTDA",
+  cnpj: "68.129.138/0001-29",
+  cidade: "João Pessoa/PB",
   description:
     "Empresa de tecnologia: sites institucionais, sistemas web, soluções com IA, automações e consultoria.",
   email: "contato@fluxustecnologia.com.br",
