@@ -486,5 +486,18 @@
       animation: none;
     }
   }
+
+  /* Variante sempre ativa (banner do produto) — inclusive em touch */
+  .card-orbit-always::before {
+    opacity: 1;
+    animation: rotate-border 2.5s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-orbit-always::before {
+      animation: none;
+      opacity: 0;
+    }
+  }
 }
 

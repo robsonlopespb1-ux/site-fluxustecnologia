@@ -464,6 +464,11 @@ export const product = {
   ],
   pricing: "Planos a partir de R$ 49,99/mês",
   modules: productModules,
-  cta: { label: "Conhecer o produto", href: "/produtos" },
+  /** Site do produto (SaaS) */
+  externalUrl: "https://igrejas.fluxustecnologia.com.br",
+  urlLabel: "igrejas.fluxustecnologia.com.br",
+  benefits: ["Sem instalação", "7 dias grátis", "Usuários ilimitados"],
+  cta: { label: "Conhecer o produto" },
+  secondaryCta: { label: "Saiba mais", href: "/produtos" },
   screenshots: productScreenshots,
 } as const;

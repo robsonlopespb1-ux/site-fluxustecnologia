@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { product, productScreenshots, site } from "@/data/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { EnergizedText } from "@/components/ui/EnergizedText";
+import { ExternalLinkIcon } from "@/components/ui/Icons";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
 import { PageHero } from "@/components/ui/PageHero";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -94,9 +96,91 @@ export default function ProdutosPage() {
               <Button href="/contato" size="lg">
                 Solicitar demonstração
               </Button>
-              {/* [CONTEÚDO PENDENTE] trocar pelo link do subdomínio
-                  igrejas.fluxustecnologia.com.br quando o produto estiver no ar */}
               <p className="text-sm font-medium text-ink-900">{product.pricing}</p>
+            </div>
+          </ScrollReveal>
+
+          {/* Banner "Conheça a plataforma" — escuro sobre a seção clara,
+              com a luz orbital sempre ativa */}
+          <ScrollReveal delay={100} className="mt-16">
+            <div className="card-orbit card-orbit-always relative overflow-hidden rounded-2xl border border-line bg-ink-950 p-8 sm:p-10 lg:p-14">
+              <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+                {/* Texto */}
+                <div>
+                  <p className="text-xs uppercase tracking-widest text-brand-500">
+                    Plataforma online
+                  </p>
+                  <h3 className="mt-4 text-2xl font-bold text-text-primary lg:text-3xl">
+                    Conheça o {product.name}
+                  </h3>
+                  <a
+                    href={product.externalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-flex items-center gap-2 break-all text-lg font-semibold text-brand-500 underline-offset-4 transition-base hover:text-brand-600 hover:underline lg:text-xl"
+                  >
+                    {product.urlLabel}
+                    <ExternalLinkIcon className="size-4.5 shrink-0" />
+                    <span className="sr-only">(abre em nova aba)</span>
+                  </a>
+                  <p className="mt-4 max-w-md text-text-secondary">
+                    Acesse a plataforma, explore os módulos e solicite uma
+                    demonstração gratuita.
+                  </p>
+                  <ul className="mt-5 flex flex-wrap gap-2">
+                    {product.benefits.map((benefit) => (
+                      <li
+                        key={benefit}
+                        className="rounded-full border border-line px-3 py-1 text-xs text-text-secondary"
+                      >
+                        {benefit}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-8">
+                    <Button
+                      href={product.externalUrl}
+                      external
+                      size="lg"
+                      className="w-full sm:w-auto"
+                    >
+                      Acessar a plataforma →
+                    </Button>
+                  </div>
+                  <p className="mt-3 text-xs text-text-tertiary">
+                    ou{" "}
+                    <a
+                      href={site.whatsappUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-2 transition-base hover:text-text-secondary"
+                    >
+                      solicite uma demonstração pelo WhatsApp
+                      <span className="sr-only"> (abre em nova aba)</span>
+                    </a>
+                  </p>
+                </div>
+
+                {/* Screenshot em moldura de browser */}
+                <figure className="overflow-hidden rounded-xl border border-line bg-ink-800 shadow-[0_20px_50px_-18px_rgba(0,0,0,0.7),0_0_45px_rgba(245,166,35,0.1)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_26px_60px_-16px_rgba(0,0,0,0.8),0_0_60px_rgba(245,166,35,0.16)]">
+                  <div
+                    aria-hidden="true"
+                    className="flex items-center gap-1.5 border-b border-line px-4 py-3"
+                  >
+                    <span className="size-2.5 rounded-full bg-ink-700" />
+                    <span className="size-2.5 rounded-full bg-ink-700" />
+                    <span className="size-2.5 rounded-full bg-ink-700" />
+                  </div>
+                  <Image
+                    src={productScreenshots[3].src}
+                    alt={productScreenshots[3].alt}
+                    width={productScreenshots[3].width}
+                    height={productScreenshots[3].height}
+                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    className="w-full"
+                  />
+                </figure>
+              </div>
             </div>
           </ScrollReveal>
         </Container>

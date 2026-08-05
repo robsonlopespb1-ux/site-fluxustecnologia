@@ -54,9 +54,22 @@ export function Product() {
               </ul>
             </ScrollReveal>
 
-            <ScrollReveal delay={300} className="mt-10">
-              <Button href={product.cta.href} size="lg">
-                {product.cta.label}
+            <ScrollReveal delay={300} className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+              {/* CTA principal vai direto ao site do SaaS; detalhes internos no secundário */}
+              <Button
+                href={product.externalUrl}
+                external
+                size="lg"
+                className="w-full sm:w-auto"
+              >
+                {product.cta.label} →
+              </Button>
+              <Button
+                href={product.secondaryCta.href}
+                variant="outline"
+                className="w-full sm:w-auto"
+              >
+                {product.secondaryCta.label}
               </Button>
             </ScrollReveal>
           </div>
