@@ -85,6 +85,7 @@ export function ContactForm() {
             type="text"
             required
             minLength={2}
+            maxLength={100}
             autoComplete="name"
             className={inputClasses}
           />
@@ -98,6 +99,7 @@ export function ContactForm() {
             name="email"
             type="email"
             required
+            maxLength={254}
             autoComplete="email"
             className={inputClasses}
           />
@@ -110,6 +112,7 @@ export function ContactForm() {
             id="contact-phone"
             name="phone"
             type="tel"
+            maxLength={20}
             autoComplete="tel"
             className={inputClasses}
           />
@@ -141,6 +144,7 @@ export function ContactForm() {
             name="message"
             required
             minLength={20}
+            maxLength={2000}
             rows={5}
             className={inputClasses}
           />
