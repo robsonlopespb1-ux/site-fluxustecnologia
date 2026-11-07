@@ -20,10 +20,11 @@ export function LogoMarquee() {
         Projetos que desenvolvemos
       </p>
 
-      {/* 4 cópias: com poucos logos, 2 cópias não cobrem viewports largas.
-          O keyframe move -25% (uma cópia) — loop sem vazio em qualquer tela. */}
-      <div className="marquee-track mt-8 [--marquee-duration:20s] lg:[--marquee-duration:28s]">
-        {[0, 1, 2, 3].map((copy) => (
+      {/* 3 cópias de 6 logos cobrem viewports até ~2880px; o keyframe move
+          exatamente uma cópia (-100%/3) — loop sem vazio em qualquer tela.
+          Duração maior que a era de 4 logos: mais distância por ciclo. */}
+      <div className="marquee-track mt-8 [--marquee-duration:28s] lg:[--marquee-duration:34s]">
+        {[0, 1, 2].map((copy) => (
           <div
             key={copy}
             aria-hidden={copy > 0}

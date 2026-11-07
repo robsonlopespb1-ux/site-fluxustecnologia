@@ -34,7 +34,14 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-ink-950/80 backdrop-blur-md">
+    /* O blur fica num FILHO absoluto: backdrop-filter no próprio <header>
+       o tornaria containing block e prenderia o overlay fixed do menu
+       mobile à barra de 56px em vez do viewport (bug do menu "vazado"). */
+    <header className="sticky top-0 z-50 border-b border-line">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 bg-ink-950/80 backdrop-blur-md"
+      />
       <Container className="flex h-14 items-center justify-between gap-6 lg:h-16">
         <Link
           href="/"
@@ -85,12 +92,12 @@ export function Header() {
         </div>
       </Container>
 
-      {/* Menu mobile — overlay fullscreen */}
+      {/* Menu mobile — overlay fullscreen, fundo 100% opaco sobre tudo */}
       <div
         id="menu-mobile"
         aria-hidden={!open}
         className={cn(
-          "fixed inset-0 z-50 flex flex-col bg-ink-950 transition-base lg:hidden",
+          "fixed inset-0 z-50 flex h-dvh flex-col overflow-y-auto bg-ink-950 transition-base lg:hidden",
           open ? "visible opacity-100" : "invisible opacity-0",
         )}
       >

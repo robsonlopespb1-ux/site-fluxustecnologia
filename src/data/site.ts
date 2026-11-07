@@ -357,6 +357,16 @@ export const clientProjects: ClientProject[] = [
     url: "https://igrejas.fluxustecnologia.com.br",
     logo: "/images/logos-clientes/fluxus-igrejas.png",
   },
+  {
+    name: "MP Viagens",
+    url: "http://mpviagensjp.com.br",
+    logo: "/images/logos-clientes/mp-viagens.png",
+  },
+  {
+    name: "Construtor Digital",
+    url: "http://construtordigital.com.br",
+    logo: "/images/logos-clientes/construtor-digital.png",
+  },
 ];
 
 /* ————— Diferenciais (§10.5) — específicos e demonstráveis ————— */

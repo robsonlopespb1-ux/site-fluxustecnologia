@@ -223,10 +223,10 @@
 
 /* ————— Marquee infinito de logos ————— */
 
-/* Move exatamente uma cópia (a faixa contém 4) — emenda invisível */
+/* Move exatamente uma cópia (a faixa contém 3) — emenda invisível */
 @keyframes marquee {
   to {
-    transform: translateX(-25%);
+    transform: translateX(calc(-100% / 3));
   }
 }
 
