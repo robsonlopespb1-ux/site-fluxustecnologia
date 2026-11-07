@@ -16,6 +16,13 @@ export const metadata: Metadata = {
   alternates: { canonical: "/projetos" },
 };
 
+/* Slugs exibidos neste hub (BIA e Fluxus Igrejas permanecem em site.ts
+ * para outras páginas, mas não aparecem aqui). */
+const HUB_SLUGS = ["portal-conselho-comunidade", "mp-viagens"];
+
+/* Projetos cujo "Ver detalhes" vai direto ao site externo (sem página interna). */
+const EXTERNAL_DETAILS = new Set(["mp-viagens"]);
+
 export default function ProjetosPage() {
   return (
     <>
@@ -34,7 +41,9 @@ export default function ProjetosPage() {
       <SectionWrapper className="section-light">
         <Container>
           <div className="flex flex-col gap-20 lg:gap-24">
-            {cases.map((item, index) => {
+            {HUB_SLUGS.map((slug) => cases.find((c) => c.slug === slug))
+              .filter((item) => item !== undefined)
+              .map((item, index) => {
               const image = item.images[0];
               const reversed = index % 2 === 1;
               return (
@@ -74,13 +83,24 @@ export default function ProjetosPage() {
                         ))}
                       </ul>
                       <div className="mt-7">
-                        <Button
-                          href={`/projetos/${item.slug}`}
-                          variant="outline"
-                          className="text-ink-900 hover:bg-brand-500/10"
-                        >
-                          Ver detalhes →
-                        </Button>
+                        {EXTERNAL_DETAILS.has(item.slug) && item.externalUrl ? (
+                          <Button
+                            href={item.externalUrl}
+                            external
+                            variant="outline"
+                            className="text-ink-900 hover:bg-brand-500/10"
+                          >
+                            Ver detalhes →
+                          </Button>
+                        ) : (
+                          <Button
+                            href={`/projetos/${item.slug}`}
+                            variant="outline"
+                            className="text-ink-900 hover:bg-brand-500/10"
+                          >
+                            Ver detalhes →
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </article>

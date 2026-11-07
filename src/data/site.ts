@@ -265,6 +265,32 @@ export const cases: CaseItem[] = [
     testimonial: null,
     metrics: null,
   },
+  {
+    slug: "mp-viagens",
+    name: "MP Viagens",
+    organization: "MP Viagens — Agência de Turismo, João Pessoa/PB",
+    type: "Site institucional",
+    description:
+      "Site de turismo para agência de viagens em João Pessoa, com busca de destinos, pacotes e contato direto com consultores.",
+    features: [
+      "Busca de destinos",
+      "Pacotes de viagem",
+      "WhatsApp direto",
+      "Design responsivo",
+    ],
+    technologies: [],
+    images: [
+      {
+        src: "/images/cases/mp-viagens-header.png",
+        alt: "Topo do site da MP Viagens, com busca de destinos e o título “Sua próxima viagem começa em João Pessoa”",
+        width: 1106,
+        height: 594,
+      },
+    ],
+    externalUrl: "http://mpviagensjp.com.br",
+    testimonial: null,
+    metrics: null,
+  },
 ];
 
 /* ————— Diagnóstico interativo (Home): "Não sabe por onde começar?" ————— */
