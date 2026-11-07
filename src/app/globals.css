@@ -205,6 +205,24 @@
   }
 }
 
+/* ————— Clip-path reveal diagonal (carrossel de soluções) ————— */
+
+@keyframes clip-reveal-diag {
+  from {
+    clip-path: polygon(0 0, 0 0, 0 0, 0 0);
+  }
+  to {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@utility animate-clip-reveal {
+  animation: clip-reveal-diag 800ms ease-in-out both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
 /* ————— Entrada da resposta do diagnóstico (fade-up) ————— */
 
 @keyframes diag-in {

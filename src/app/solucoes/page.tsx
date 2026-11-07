@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { cases } from "@/data/site";
 import { Button } from "@/components/ui/Button";
+import { ClipRevealCarousel } from "@/components/ui/ClipRevealCarousel";
 import { Container } from "@/components/ui/Container";
 import { EnergizedText } from "@/components/ui/EnergizedText";
 import { PageHero } from "@/components/ui/PageHero";
@@ -23,6 +24,10 @@ interface Solution {
   paragraphs: string[];
   includes: string[];
   caseSlug?: string;
+  /** Carrossel com clip-path reveal no lugar do screenshot estático. */
+  revealImages?: { src: string; alt: string }[];
+  /** Substitui o botão de case externo por um CTA interno. */
+  ctaOverride?: { label: string; href: string };
 }
 
 const solutions: Solution[] = [
@@ -35,14 +40,24 @@ const solutions: Solution[] = [
       "Cada projeto é construído com otimização para mecanismos de busca e arquitetura preparada para crescer: quando a organização precisar de novas páginas, áreas ou integrações, a base já está pronta.",
     ],
     includes: [
-      "Design responsivo",
-      "Otimização para buscas (SEO)",
-      "Acessibilidade",
-      "Performance",
-      "Arquitetura para crescimento",
-      "Painel de conteúdo (futuro)",
+      "Responsivo em qualquer dispositivo",
+      "Otimizado para mecanismos de busca",
+      "Carregamento rápido e fluido",
+      "Acessível e dentro dos padrões web",
+      "Arquitetura escalável",
+      "Autonomia para atualizar conteúdo",
     ],
-    caseSlug: "portal-conselho-comunidade",
+    revealImages: [
+      {
+        src: "/images/cases/portal-conselho-home.png",
+        alt: "Página inicial do Portal do Conselho da Comunidade da Comarca de João Pessoa",
+      },
+      {
+        src: "/images/cases/mp-viagens-header.png",
+        alt: "Topo do site da MP Viagens",
+      },
+    ],
+    ctaOverride: { label: "Ver nossos sites →", href: "/projetos" },
   },
   {
     number: "02",
@@ -114,6 +129,7 @@ export default function SolucoesPage() {
           ? cases.find((item) => item.slug === solution.caseSlug)
           : undefined;
         const caseImage = relatedCase?.images[0];
+        const hasMedia = Boolean(caseImage || solution.revealImages);
 
         return (
           <SectionWrapper
@@ -125,7 +141,7 @@ export default function SolucoesPage() {
             <Container>
               <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
                 {/* Texto */}
-                <ScrollReveal className={cn("lg:col-span-6", !relatedCase && "lg:col-span-7")}>
+                <ScrollReveal className={cn("lg:col-span-6", !hasMedia && "lg:col-span-7")}>
                   <span
                     aria-hidden="true"
                     className="text-stat text-brand-500"
@@ -138,22 +154,34 @@ export default function SolucoesPage() {
                       {paragraph}
                     </p>
                   ))}
-                  {relatedCase?.externalUrl && (
+                  {solution.ctaOverride ? (
                     <div className="mt-8">
                       <Button
-                        href={relatedCase.externalUrl}
-                        external
+                        href={solution.ctaOverride.href}
                         variant="outline"
                         className={cn(solution.light && "text-ink-900 hover:bg-brand-500/10")}
                       >
-                        Ver projeto: {relatedCase.name} →
+                        {solution.ctaOverride.label}
                       </Button>
                     </div>
+                  ) : (
+                    relatedCase?.externalUrl && (
+                      <div className="mt-8">
+                        <Button
+                          href={relatedCase.externalUrl}
+                          external
+                          variant="outline"
+                          className={cn(solution.light && "text-ink-900 hover:bg-brand-500/10")}
+                        >
+                          Ver projeto: {relatedCase.name} →
+                        </Button>
+                      </div>
+                    )
                   )}
                 </ScrollReveal>
 
                 {/* Lista + screenshot */}
-                <div className={cn("lg:col-span-5 lg:col-start-8", !relatedCase && "lg:col-span-4 lg:col-start-9")}>
+                <div className={cn("lg:col-span-5 lg:col-start-8", !hasMedia && "lg:col-span-4 lg:col-start-9")}>
                   <ScrollReveal animation="fade-right" delay={150}>
                     <h3 className="text-caption uppercase tracking-widest">
                       O que inclui
@@ -176,6 +204,17 @@ export default function SolucoesPage() {
                       ))}
                     </ul>
                   </ScrollReveal>
+
+                  {solution.revealImages && (
+                    <ScrollReveal animation="fade-right" delay={250} className="mt-8">
+                      <figure className="overflow-hidden rounded-xl border border-paper-line bg-white p-2 shadow-[0_16px_40px_-18px_rgba(13,13,13,0.25)]">
+                        <ClipRevealCarousel
+                          images={solution.revealImages}
+                          className="overflow-hidden rounded-lg"
+                        />
+                      </figure>
+                    </ScrollReveal>
+                  )}
 
                   {caseImage && (
                     <ScrollReveal animation="fade-right" delay={250} className="mt-8">
