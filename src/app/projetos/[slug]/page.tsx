@@ -74,6 +74,14 @@ export default async function ProjetoPage({
               aria-hidden="true"
               tabIndex={-1}
             />
+            {/* Camada de legibilidade: preto sólido sob o texto (esquerda)
+                com fade revelando o vídeo à direita; no mobile o texto ocupa
+                tudo, então o fade cobre a largura inteira. A mask-image das
+                bordas do vídeo permanece — esta camada é adicional. */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(to_right,#0d0d0d_0%,transparent_100%)] md:bg-[linear-gradient(to_right,#0d0d0d_0%,#0d0d0d_35%,rgba(13,13,13,0.6)_55%,transparent_75%)]"
+            />
           </>
         )}
         <Container className="relative z-10 py-16 lg:py-24">
