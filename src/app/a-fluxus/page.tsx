@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { EnergizedText } from "@/components/ui/EnergizedText";
-import { PageHero } from "@/components/ui/PageHero";
+import { FlashlightReveal } from "@/components/ui/FlashlightReveal";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
@@ -66,17 +66,37 @@ const values = [
 export default function AFluxusPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Sobre a Fluxus"
-        title="Tecnologia com propósito e resultado"
-        subtitle={
-          <p>
-            Somos uma empresa de tecnologia em João Pessoa/PB. Desenvolvemos
-            sites, sistemas, plataformas e soluções com inteligência artificial
-            para organizações que precisam de tecnologia sob medida.
-          </p>
-        }
-      />
+      {/* Hero com efeito lanterna: o F dourado escondido no escuro é
+          revelado pelo círculo de luz que segue o mouse (PageHero inline —
+          o fundo opaco do componente compartilhado cobriria a marca d'água) */}
+      <FlashlightReveal
+        imageSrc="/logo-fluxus-icone-transparente.png"
+        imageAlt="Logo Fluxus Tecnologia"
+        imageWidth={666}
+        imageHeight={720}
+        className="border-b border-line bg-ink-950"
+      >
+        <section>
+          <Container className="py-20 lg:py-28">
+            <ScrollReveal>
+              <p className="text-caption uppercase tracking-widest text-brand-500">
+                Sobre a Fluxus
+              </p>
+              <h1 className="mt-4 max-w-3xl text-balance">
+                Tecnologia com propósito e resultado
+              </h1>
+              <div className="mt-6 max-w-2xl text-lg">
+                <p>
+                  Somos uma empresa de tecnologia em João Pessoa/PB.
+                  Desenvolvemos sites, sistemas, plataformas e soluções com
+                  inteligência artificial para organizações que precisam de
+                  tecnologia sob medida.
+                </p>
+              </div>
+            </ScrollReveal>
+          </Container>
+        </section>
+      </FlashlightReveal>
 
       {/* O que nos move — fundo claro */}
       <SectionWrapper className="section-light">
