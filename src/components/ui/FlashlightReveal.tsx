@@ -13,6 +13,8 @@ interface FlashlightRevealProps {
   imageHeight?: number;
   /** Texto gigante como marca d'água em vez de imagem. */
   watermarkText?: string;
+  /** Classe de cor do texto da marca d'água. */
+  watermarkColor?: string;
   className?: string;
   children: React.ReactNode;
 }
@@ -30,6 +32,7 @@ export function FlashlightReveal({
   imageWidth,
   imageHeight,
   watermarkText,
+  watermarkColor = "text-white",
   className,
   children,
 }: FlashlightRevealProps) {
@@ -80,7 +83,10 @@ export function FlashlightReveal({
       {watermarkText ? (
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[200px] font-bold text-white opacity-10 md:text-[250px] md:opacity-20"
+          className={cn(
+            "pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[200px] font-bold opacity-10 md:text-[250px] md:opacity-20",
+            watermarkColor,
+          )}
         >
           {watermarkText}
         </span>

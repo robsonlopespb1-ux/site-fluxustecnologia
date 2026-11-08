@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { EnergizedText } from "@/components/ui/EnergizedText";
 import { ExternalLinkIcon } from "@/components/ui/Icons";
+import { FlashlightReveal } from "@/components/ui/FlashlightReveal";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
-import { PageHero } from "@/components/ui/PageHero";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
@@ -20,16 +20,35 @@ export const metadata: Metadata = {
 export default function ProdutosPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Nossos produtos"
-        title="Produtos próprios que nascem da prática"
-        subtitle={
-          <p>
-            Além de desenvolver soluções sob medida, criamos produtos digitais
-            próprios para resolver problemas que encontramos no caminho.
-          </p>
-        }
-      />
+      {/* Hero com efeito lanterna: a palavra "Tecnologia" gigante em amarelo
+          escondida no escuro é revelada pelo círculo de luz que segue o mouse
+          (PageHero inline — o fundo opaco do componente compartilhado
+          cobriria a marca d'água) */}
+      <FlashlightReveal
+        watermarkText="Tecnologia"
+        watermarkColor="text-brand-500"
+        className="border-b border-line bg-ink-950"
+      >
+        <section>
+          <Container className="py-20 lg:py-28">
+            <ScrollReveal>
+              <p className="text-caption uppercase tracking-widest text-brand-500">
+                Nossos produtos
+              </p>
+              <h1 className="mt-4 max-w-3xl text-balance">
+                Produtos próprios que nascem da prática
+              </h1>
+              <div className="mt-6 max-w-2xl text-lg">
+                <p>
+                  Além de desenvolver soluções sob medida, criamos produtos
+                  digitais próprios para resolver problemas que encontramos no
+                  caminho.
+                </p>
+              </div>
+            </ScrollReveal>
+          </Container>
+        </section>
+      </FlashlightReveal>
 
       {/* Fluxus Gestão para Igrejas — fundo claro */}
       <SectionWrapper className="section-light">
