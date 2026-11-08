@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { SwipeStackCarousel } from "@/components/ui/SwipeStackCarousel";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 /* Slugs fora da lista → 404 em build/runtime (§3.2) */
@@ -74,9 +75,13 @@ export default async function ProjetoPage({
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <ScrollReveal className="lg:col-span-6">
               <h2>Sobre o projeto</h2>
-              {/* [CONTEÚDO PENDENTE] descrição expandida por projeto —
-                  por ora, a descrição curta de src/data/site.ts */}
-              <p className="mt-5 max-w-xl">{item.description}</p>
+              {(item.expandedDescription ?? item.description)
+                .split("\n")
+                .map((paragraph) => (
+                  <p key={paragraph.slice(0, 32)} className="mt-5 max-w-xl">
+                    {paragraph}
+                  </p>
+                ))}
             </ScrollReveal>
             <ScrollReveal delay={150} className="lg:col-span-5 lg:col-start-8">
               <h3 className="text-caption uppercase tracking-widest">
@@ -119,15 +124,23 @@ export default async function ProjetoPage({
         <Container>
           <ScrollReveal>
             <figure className="mx-auto max-w-4xl overflow-hidden rounded-xl border border-line bg-ink-800 p-2 sm:p-3">
-              <ImageCarousel
-                images={item.images}
-                sizes="(min-width: 1024px) 56rem, 100vw"
-                className="overflow-hidden rounded-lg"
-                dotsVariant="dark"
-                {...(item.images.length > 3
-                  ? { aspectClassName: "aspect-[1345/500]", fit: "contain" as const }
-                  : {})}
-              />
+              {item.images.length >= 3 ? (
+                /* Pilha swipe para conjuntos grandes (proporções mistas →
+                   contain sobre o fundo da carta) */
+                <SwipeStackCarousel
+                  images={item.images}
+                  aspectClassName="aspect-[1345/500]"
+                  fit="contain"
+                  className="rounded-lg"
+                />
+              ) : (
+                <ImageCarousel
+                  images={item.images}
+                  sizes="(min-width: 1024px) 56rem, 100vw"
+                  className="overflow-hidden rounded-lg"
+                  dotsVariant="dark"
+                />
+              )}
             </figure>
           </ScrollReveal>
         </Container>

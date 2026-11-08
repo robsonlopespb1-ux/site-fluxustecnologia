@@ -174,6 +174,8 @@ export interface CaseItem {
   organization: string;
   type: string;
   description: string;
+  /** Narrativa longa da página de detalhe (parágrafos separados por \n). */
+  expandedDescription?: string;
   features: string[];
   /** TODO: preencher com a stack real de cada projeto (conteúdo pendente).
    *  Enquanto vazio, a linha de tecnologias não é renderizada. */
@@ -192,22 +194,56 @@ export const cases: CaseItem[] = [
     organization: "Conselho da Comunidade da Comarca de João Pessoa/PB",
     type: "Portal institucional",
     description:
-      "Portal institucional completo com portal de notícias, assistente virtual com IA, área de transparência e sistema de doações.",
+      "Site institucional de alta performance com foco em engajamento e transparência. Conta com hub de notícias, sistema integrado de doações, prestação de contas em tempo real e atendimento automatizado via Inteligência Artificial.",
+    expandedDescription:
+      "O Conselho da Comunidade precisava de um canal seguro para prestar contas, facilitar doações e acolher a sociedade.\nA partir dessa urgência, a Fluxus desenvolveu uma solução completa. Criamos uma plataforma onde a transparência ocorre em tempo real com notas fiscais, o apoio financeiro é facilitado por um sistema ágil, e o atendimento ganhou o reforço de uma Inteligência Artificial disponível 24 horas. É a tecnologia atuando como motor de transformação social.",
     features: [
-      "Portal de notícias",
-      "Assistente virtual (BIA)",
-      "Transparência com notas fiscais",
-      "Doações via PIX",
-      "≈16 páginas",
-      "Responsivo",
+      "Hub de Conteúdo Dinâmico",
+      "Atendimento IA 24/7",
+      "Transparência Ativa",
+      "Integração PIX Segura",
+      "Arquitetura Escalável",
+      "Design Mobile-First",
+      "Painel Admin Exclusivo",
+      "Segurança e Adequação LGPD",
     ],
     technologies: [],
     images: [
       {
-        src: "/images/cases/portal-conselho-home.png",
-        alt: "Página inicial do Portal do Conselho da Comunidade da Comarca de João Pessoa",
-        width: 1365,
-        height: 593,
+        src: "/images/cases/conselho-detalhe-01.png",
+        alt: "Página inicial do Portal do Conselho da Comunidade",
+        width: 1345,
+        height: 389,
+      },
+      {
+        src: "/images/cases/conselho-detalhe-02.png",
+        alt: "Seção interna do Portal do Conselho",
+        width: 1351,
+        height: 485,
+      },
+      {
+        src: "/images/cases/conselho-detalhe-03.png",
+        alt: "Área de transparência do Portal",
+        width: 1350,
+        height: 484,
+      },
+      {
+        src: "/images/cases/conselho-detalhe-04.png",
+        alt: "Sistema de doações do Portal",
+        width: 1272,
+        height: 481,
+      },
+      {
+        src: "/images/cases/conselho-detalhe-05.png",
+        alt: "Hub de notícias do Portal",
+        width: 1347,
+        height: 603,
+      },
+      {
+        src: "/images/cases/conselho-detalhe-06.png",
+        alt: "Assistente virtual BIA do Portal",
+        width: 1242,
+        height: 307,
       },
     ],
     externalUrl: "https://www.conselhodacomunidadejp.com.br",

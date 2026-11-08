@@ -205,6 +205,22 @@
   }
 }
 
+/* ————— Swipe stack (páginas de projeto) ————— */
+
+@keyframes swipe-out {
+  to {
+    transform: translateX(120%) rotate(12deg) scale(0.95);
+    opacity: 0;
+  }
+}
+
+@utility animate-swipe-out {
+  animation: swipe-out 600ms ease-in both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
 /* ————— Clip-path reveal diagonal (carrossel de soluções) ————— */
 
 @keyframes clip-reveal-diag {
