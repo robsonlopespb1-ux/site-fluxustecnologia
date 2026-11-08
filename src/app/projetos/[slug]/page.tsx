@@ -56,13 +56,13 @@ export default async function ProjetoPage({
                 (horizontal ∩ vertical) — zero linha de corte por construção,
                 sem overlay para casar com o fundo. */}
             <video
-              className="absolute inset-0 z-0 h-full w-full object-cover opacity-30 motion-reduce:hidden"
+              className="absolute inset-0 z-0 h-full w-full object-cover opacity-50 motion-reduce:hidden"
               style={{
                 maskImage:
-                  "linear-gradient(to right, transparent 0%, black 18%, black 55%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 22%, black 60%, transparent 100%)",
+                  "linear-gradient(to right, transparent 0%, black 18%, black 70%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 22%, black 60%, transparent 100%)",
                 maskComposite: "intersect",
                 WebkitMaskImage:
-                  "linear-gradient(to right, transparent 0%, black 18%, black 55%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 22%, black 60%, transparent 100%)",
+                  "linear-gradient(to right, transparent 0%, black 18%, black 70%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 22%, black 60%, transparent 100%)",
                 WebkitMaskComposite: "source-in",
               }}
               src={item.heroVideo}
@@ -80,7 +80,7 @@ export default async function ProjetoPage({
                 bordas do vídeo permanece — esta camada é adicional. */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(to_right,#0d0d0d_0%,transparent_100%)] md:bg-[linear-gradient(to_right,#0d0d0d_0%,#0d0d0d_35%,rgba(13,13,13,0.6)_55%,transparent_75%)]"
+              className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(to_right,#0d0d0d_0%,transparent_100%)] md:bg-[linear-gradient(to_right,#0d0d0d_0%,#0d0d0d_30%,rgba(13,13,13,0.4)_45%,transparent_60%)]"
             />
           </>
         )}
