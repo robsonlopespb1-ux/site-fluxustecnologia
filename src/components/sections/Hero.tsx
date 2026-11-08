@@ -131,10 +131,13 @@ export function Hero() {
         ))
       )}
       {/* Overlay para legibilidade do texto sobre o vídeo */}
-      <div className="absolute inset-0 z-10 bg-ink-950/70" aria-hidden="true" />
+      <div className="absolute inset-0 z-10 bg-ink-950/50" aria-hidden="true" />
 
       <Container className="relative z-20 py-16 sm:py-20">
-        <h1 className="text-display max-w-4xl">
+        <h1
+          className="text-display max-w-4xl"
+          style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}
+        >
           {reducedMotion ? (
             <span className="text-brand-500">{hero.reducedMotionWord}</span>
           ) : (
@@ -173,7 +176,12 @@ export function Hero() {
           )}{" "}
           <span>{hero.titleSuffix}</span>
         </h1>
-        <p className="mt-6 max-w-xl text-lg">{hero.subtitle}</p>
+        <p
+          className="mt-6 max-w-xl text-lg"
+          style={{ textShadow: "0 2px 8px rgba(0,0,0,0.8)" }}
+        >
+          {hero.subtitle}
+        </p>
         <ScrollReveal
           delay={300}
           className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4"
