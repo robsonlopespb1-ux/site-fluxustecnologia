@@ -28,8 +28,8 @@ interface Solution {
   revealImages?: { src: string; alt: string }[];
   /** Substitui o botão de case externo por um CTA interno. */
   ctaOverride?: { label: string; href: string };
-  /** Substitui o botão por um texto sutil (sem link). */
-  ctaNote?: string;
+  /** Substitui o botão por um botão desabilitado (sem navegação). */
+  ctaDisabled?: string;
 }
 
 const solutions: Solution[] = [
@@ -118,7 +118,7 @@ const solutions: Solution[] = [
       "Escopo definido e transparente",
     ],
     caseSlug: "bia-assistente-virtual",
-    ctaNote: "Em breve, apresentaremos nossos projetos de inteligência artificial.",
+    ctaDisabled: "Saiba mais em breve →",
   },
   {
     number: "04",
@@ -209,15 +209,18 @@ export default function SolucoesPage() {
                         {solution.ctaOverride.label}
                       </Button>
                     </div>
-                  ) : solution.ctaNote ? (
-                    <p
-                      className={cn(
-                        "mt-8 text-sm italic",
-                        solution.light ? "text-[#52525b]" : "text-text-secondary",
-                      )}
-                    >
-                      {solution.ctaNote}
-                    </p>
+                  ) : solution.ctaDisabled ? (
+                    /* cursor-not-allowed no wrapper: o botão desabilitado tem
+                       pointer-events-none e não exibiria o cursor sozinho */
+                    <div className="mt-8 w-fit cursor-not-allowed">
+                      <Button
+                        disabled
+                        variant="outline"
+                        className={cn(solution.light && "text-ink-900")}
+                      >
+                        {solution.ctaDisabled}
+                      </Button>
+                    </div>
                   ) : (
                     relatedCase?.externalUrl && (
                       <div className="mt-8">
@@ -287,14 +290,23 @@ export default function SolucoesPage() {
                             : "border-line bg-ink-800",
                         )}
                       >
-                        <Image
-                          src={caseImage.src}
-                          alt={caseImage.alt}
-                          width={caseImage.width}
-                          height={caseImage.height}
-                          sizes="(min-width: 1024px) 40vw, 100vw"
-                          className="mx-auto w-full max-w-sm rounded-lg lg:max-w-none"
-                        />
+                        {/* Mesmo aspecto paisagem do carrossel das seções
+                            01/02; a imagem retrato fica centralizada com
+                            object-contain sobre fundo sutil */}
+                        <div
+                          className={cn(
+                            "relative aspect-[1365/593] overflow-hidden rounded-lg",
+                            solution.light ? "bg-ink-950/5" : "bg-ink-800",
+                          )}
+                        >
+                          <Image
+                            src={caseImage.src}
+                            alt={caseImage.alt}
+                            fill
+                            sizes="(min-width: 1024px) 40vw, 100vw"
+                            className="object-contain"
+                          />
+                        </div>
                       </figure>
                     </ScrollReveal>
                   )}
