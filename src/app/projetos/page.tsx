@@ -5,7 +5,7 @@ import { cases } from "@/data/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { EnergizedText } from "@/components/ui/EnergizedText";
-import { PageHero } from "@/components/ui/PageHero";
+import { FlashlightReveal } from "@/components/ui/FlashlightReveal";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { cn } from "@/lib/cn";
@@ -24,16 +24,50 @@ const HUB_SLUGS = ["portal-conselho-comunidade", "site-mpviagens"];
 export default function ProjetosPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Projetos"
-        title="Cada projeto nasce de um problema real"
-        subtitle={
-          <EnergizedText
-            as="p"
-            text="Conheça as soluções que desenvolvemos para organizações que precisavam de tecnologia sob medida."
-          />
+      {/* Hero com efeito lanterna: a logo completa (F + FLUXUS + Tecnologia)
+          escondida no escuro é revelada pelo círculo de luz que segue o mouse
+          (PageHero inline — o fundo opaco do componente compartilhado
+          cobriria a marca d'água) */}
+      <FlashlightReveal
+        className="border-b border-line bg-ink-950"
+        watermarkContent={
+          <div className="flex flex-col items-center gap-3">
+            <Image
+              src="/logo-fluxus-icone-transparente.png"
+              alt=""
+              aria-hidden="true"
+              width={666}
+              height={720}
+              className="w-[180px] md:w-[220px]"
+            />
+            <span className="text-[60px] font-bold leading-none tracking-wider text-white md:text-[80px]">
+              FLUXUS
+            </span>
+            <span className="text-[24px] font-light leading-none tracking-[0.3em] text-brand-500 md:text-[32px]">
+              Tecnologia
+            </span>
+          </div>
         }
-      />
+      >
+        <section>
+          <Container className="py-20 lg:py-28">
+            <ScrollReveal>
+              <p className="text-caption uppercase tracking-widest text-brand-500">
+                Projetos
+              </p>
+              <h1 className="mt-4 max-w-3xl text-balance">
+                Cada projeto nasce de um problema real
+              </h1>
+              <div className="mt-6 max-w-2xl text-lg">
+                <EnergizedText
+                  as="p"
+                  text="Conheça as soluções que desenvolvemos para organizações que precisavam de tecnologia sob medida."
+                />
+              </div>
+            </ScrollReveal>
+          </Container>
+        </section>
+      </FlashlightReveal>
 
       {/* Grid editorial: 1 projeto por linha, lado do screenshot alternando */}
       <SectionWrapper className="section-light">

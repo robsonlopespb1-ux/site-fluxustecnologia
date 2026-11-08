@@ -15,6 +15,9 @@ interface FlashlightRevealProps {
   watermarkText?: string;
   /** Classe de cor do texto da marca d'água. */
   watermarkColor?: string;
+  /** Conteúdo customizado como marca d'água.
+      Prioridade: watermarkContent > watermarkText > imageSrc. */
+  watermarkContent?: React.ReactNode;
   className?: string;
   children: React.ReactNode;
 }
@@ -33,6 +36,7 @@ export function FlashlightReveal({
   imageHeight,
   watermarkText,
   watermarkColor = "text-white",
+  watermarkContent,
   className,
   children,
 }: FlashlightRevealProps) {
@@ -78,9 +82,17 @@ export function FlashlightReveal({
       onMouseLeave={handleMouseLeave}
       className={cn("relative overflow-hidden", className)}
     >
-      {/* Marca d'água no lado direito: texto gigante OU imagem.
-          Mobile/reduced: opacidade menor, sempre visível (sem overlay). */}
-      {watermarkText ? (
+      {/* Marca d'água no lado direito: conteúdo customizado, texto gigante
+          OU imagem. Mobile/reduced: opacidade menor, sempre visível (sem
+          overlay). */}
+      {watermarkContent ? (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 select-none opacity-10 md:right-12 md:opacity-20"
+        >
+          {watermarkContent}
+        </div>
+      ) : watermarkText ? (
         <span
           aria-hidden="true"
           className={cn(
