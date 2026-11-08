@@ -484,12 +484,64 @@
     text-shadow: 0 0 10px rgb(245 166 35 / 0.35);
   }
 
+  /*
+   * Variante automática: onda de glow dourado percorrendo as letras em
+   * loop (delay escalonado por --letter-index; duração total via
+   * --glow-duration no container). O hover desliga a animação da letra
+   * sob o cursor para o glow manual coexistir com a onda.
+   */
+  .energize-letter-auto {
+    animation: letter-glow var(--glow-duration, 2400ms) ease-in-out infinite;
+    animation-delay: calc(var(--letter-index, 0) * 100ms);
+  }
+
+  .energize-letter-auto:hover {
+    animation: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .energize-letter:hover,
     .energize-letter:hover + .energize-letter,
     .energize-letter:has(+ .energize-letter:hover) {
       text-shadow: none;
     }
+
+    .energize-letter-auto {
+      animation: none;
+    }
+  }
+}
+
+@keyframes letter-glow {
+  0%,
+  100% {
+    color: #ffffff;
+    text-shadow: none;
+  }
+  50% {
+    color: var(--color-brand-500);
+    text-shadow:
+      0 0 10px rgb(245 166 35 / 0.6),
+      0 0 20px rgb(245 166 35 / 0.3);
+  }
+}
+
+/* ————— Divider com brilho percorrendo (AnimatedDivider) ————— */
+
+@keyframes shimmer-line {
+  0% {
+    transform: translateX(-150px);
+  }
+  100% {
+    transform: translateX(100vw);
+  }
+}
+
+@utility animate-shimmer-line {
+  animation: shimmer-line 3s ease-in-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    /* Pausada no 0% o traço fica fora da tela — linha estática */
+    animation-play-state: paused;
   }
 }
 

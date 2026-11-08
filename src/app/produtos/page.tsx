@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { product, productScreenshots, site } from "@/data/site";
+import { AnimatedDivider } from "@/components/ui/AnimatedDivider";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { EnergizedText } from "@/components/ui/EnergizedText";
@@ -99,10 +100,12 @@ export default function ProdutosPage() {
           escondida no escuro é revelada pelo círculo de luz que segue o mouse
           (PageHero inline — o fundo opaco do componente compartilhado
           cobriria a marca d'água) */}
+      {/* border-b removida: o AnimatedDivider logo abaixo faz o papel
+          de separador (evita linha dupla) */}
       <FlashlightReveal
         watermarkText="Tecnologia"
         watermarkColor="text-brand-500"
-        className="border-b border-line bg-ink-950"
+        className="bg-ink-950"
       >
         <section>
           <Container className="py-20 lg:py-28">
@@ -124,6 +127,8 @@ export default function ProdutosPage() {
           </Container>
         </section>
       </FlashlightReveal>
+
+      <AnimatedDivider />
 
       {/* Produtos próprios — título energizado ao centro, glass cards
           empilhados dos lados (desktop) ou em grid limpo acima (mobile) */}
@@ -155,6 +160,7 @@ export default function ProdutosPage() {
               <EnergizedText
                 as="h2"
                 text="Produtos próprios"
+                autoAnimate
                 className="text-5xl font-bold md:text-6xl lg:text-7xl [&_.energize-word]:block"
               />
               <p className="mx-auto mt-6 max-w-md text-center text-lg text-text-secondary">
@@ -178,6 +184,8 @@ export default function ProdutosPage() {
           </div>
         </Container>
       </SectionWrapper>
+
+      <AnimatedDivider />
 
       {/* Banner "Conheça a plataforma" — escuro sobre seção clara,
           com a luz orbital sempre ativa */}
@@ -267,8 +275,11 @@ export default function ProdutosPage() {
         </Container>
       </SectionWrapper>
 
-      {/* Próximos produtos — fundo escuro */}
-      <SectionWrapper className="border-t border-line bg-ink-950">
+      <AnimatedDivider />
+
+      {/* Próximos produtos — fundo escuro (border-t removida: o
+          AnimatedDivider acima é o separador) */}
+      <SectionWrapper className="bg-ink-950">
         <Container className="text-center">
           <ScrollReveal animation="scale-in">
             <h2 className="mx-auto max-w-2xl text-balance">O que vem por aí</h2>
