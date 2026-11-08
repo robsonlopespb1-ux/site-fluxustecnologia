@@ -213,6 +213,12 @@ export const cases: CaseItem[] = [
     technologies: [],
     images: [
       {
+        src: "/images/cases/conselho-header.png",
+        alt: "Header do Portal do Conselho da Comunidade",
+        width: 1347,
+        height: 589,
+      },
+      {
         src: "/images/cases/conselho-detalhe-01.png",
         alt: "Página inicial do Portal do Conselho da Comunidade",
         width: 1345,
