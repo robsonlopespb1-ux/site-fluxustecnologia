@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { EnergizedText } from "@/components/ui/EnergizedText";
 import { FlashlightReveal } from "@/components/ui/FlashlightReveal";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { ScrollRevealText } from "@/components/ui/ScrollRevealText";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 export const metadata: Metadata = {
@@ -133,25 +134,30 @@ export default function AFluxusPage() {
           <ScrollReveal className="max-w-2xl">
             <h2>Como trabalhamos</h2>
           </ScrollReveal>
+          {/* Sem ScrollReveal nos itens: o fade-up de entrada brigaria com o
+              word-reveal contínuo — cada bloco tem seu próprio progresso */}
           <ul className="mt-12">
-            {processSteps.map((step, index) => (
-              <ScrollReveal
-                as="li"
+            {processSteps.map((step) => (
+              <li
                 key={step.number}
-                delay={index * 150}
                 className="grid gap-3 border-t border-line py-8 last:border-b lg:grid-cols-12 lg:gap-8 lg:py-10"
               >
                 <div className="flex items-baseline gap-4 lg:col-span-5">
-                  <span
-                    aria-hidden="true"
-                    className="text-xs font-semibold tabular-nums text-brand-500"
+                  <ScrollRevealText
+                    tag="span"
+                    highlight
+                    className="text-xs font-semibold tabular-nums"
                   >
                     {step.number}
-                  </span>
-                  <h3>{step.title}</h3>
+                  </ScrollRevealText>
+                  <ScrollRevealText tag="h3" highlight>
+                    {step.title}
+                  </ScrollRevealText>
                 </div>
-                <p className="lg:col-span-6 lg:col-start-7">{step.description}</p>
-              </ScrollReveal>
+                <ScrollRevealText tag="p" className="lg:col-span-6 lg:col-start-7">
+                  {step.description}
+                </ScrollRevealText>
+              </li>
             ))}
           </ul>
         </Container>
