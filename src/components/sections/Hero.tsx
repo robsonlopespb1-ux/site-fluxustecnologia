@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { hero } from "@/data/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -9,6 +9,13 @@ import { cn } from "@/lib/cn";
 
 const ROTATE_INTERVAL_MS = 3000;
 const SLIDE_DURATION_MS = 500;
+
+/** Sequência do fundo: cada vídeo toca uma vez e troca por crossfade. */
+const VIDEO_SOURCES = [
+  "/videos/hero-01.mp4",
+  "/videos/hero-02.mp4",
+  "/videos/hero-03.mp4",
+];
 
 const words = hero.rotatingWords;
 /** Clone da primeira palavra no fim: o loop desliza até ela e "salta" de
@@ -26,6 +33,28 @@ export function Hero() {
   const [reducedMotion, setReducedMotion] = useState(false);
   const [index, setIndex] = useState(0);
   const [withTransition, setWithTransition] = useState(true);
+  const [activeVideo, setActiveVideo] = useState(0);
+  const activeVideoRef = useRef(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  /* Avança para o próximo vídeo: dispara o play do seguinte e troca a
+     opacidade (crossfade de 1s cobre a emenda — os vídeos terminam em
+     clarão branco, então não há flash preto). Vídeo com erro é pulado. */
+  const advanceVideo = (from: number) => {
+    if (from !== activeVideoRef.current) return; // evento de vídeo não-ativo
+    const next = (from + 1) % VIDEO_SOURCES.length;
+    activeVideoRef.current = next;
+    setActiveVideo(next);
+    const el = videoRefs.current[next];
+    if (el) {
+      try {
+        el.currentTime = 0;
+      } catch {
+        /* metadados ainda não prontos — play parte do início mesmo */
+      }
+      void el.play().catch(() => advanceVideo(next));
+    }
+  };
 
   useEffect(() => {
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -65,19 +94,41 @@ export function Hero() {
       id="inicio"
       className="relative flex min-h-[85svh] items-center overflow-hidden bg-ink-950 lg:min-h-[calc(100svh-4rem)]"
     >
-      {/* Fundo decorativo */}
-      {!reducedMotion && (
+      {/* Fundo decorativo: 3 vídeos em sequência com crossfade de 1s.
+          autoPlay SÓ no primeiro — os demais tocariam ocultos desde o mount
+          e terminariam fora de hora; são disparados por play() na vez. */}
+      {reducedMotion ? (
         <video
           className="absolute inset-0 z-0 h-full w-full object-cover"
-          src="/videos/hero-bg.mp4"
-          autoPlay
+          src={VIDEO_SOURCES[0]}
           muted
-          loop
           playsInline
-          preload="metadata"
+          preload="auto"
           aria-hidden="true"
           tabIndex={-1}
         />
+      ) : (
+        VIDEO_SOURCES.map((src, i) => (
+          <video
+            key={src}
+            ref={(el) => {
+              videoRefs.current[i] = el;
+            }}
+            className={cn(
+              "absolute inset-0 z-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out",
+              i === activeVideo ? "opacity-100" : "opacity-0",
+            )}
+            src={src}
+            autoPlay={i === 0}
+            muted
+            playsInline
+            preload="auto"
+            onEnded={() => advanceVideo(i)}
+            onError={() => advanceVideo(i)}
+            aria-hidden="true"
+            tabIndex={-1}
+          />
+        ))
       )}
       {/* Overlay para legibilidade do texto sobre o vídeo */}
       <div className="absolute inset-0 z-10 bg-ink-950/70" aria-hidden="true" />
