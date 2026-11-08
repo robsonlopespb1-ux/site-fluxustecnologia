@@ -25,6 +25,7 @@ export interface NavLink {
 }
 
 export const navigation: NavLink[] = [
+  { label: "Início", href: "/" },
   { label: "A Fluxus", href: "/a-fluxus" },
   { label: "Soluções", href: "/solucoes" },
   { label: "Produtos", href: "/produtos" },
