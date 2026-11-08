@@ -68,13 +68,24 @@ const solutions: Solution[] = [
       "O processo começa pelo levantamento dos requisitos reais da operação — e termina com uma interface que a equipe consegue usar sem manual, com suporte contínuo da Fluxus.",
     ],
     includes: [
-      "Levantamento de requisitos",
-      "Arquitetura escalável",
-      "Interface intuitiva",
-      "Integrações",
-      "Relatórios",
-      "Suporte contínuo",
+      "Levantamento de requisitos sob medida",
+      "Arquitetura escalável e segura",
+      "Interface intuitiva sem manual",
+      "Integrações com sistemas existentes",
+      "Relatórios e dashboards automáticos",
+      "Suporte contínuo pós-entrega",
     ],
+    revealImages: [
+      {
+        src: "/images/cases/sistemas-01.png",
+        alt: "Dashboard do sistema Fluxus Igrejas",
+      },
+      {
+        src: "/images/cases/sistemas-02.png",
+        alt: "Painel administrativo do sistema",
+      },
+    ],
+    ctaOverride: { label: "Ver nossos sistemas →", href: "/produtos" },
   },
   {
     number: "03",
@@ -207,7 +218,14 @@ export default function SolucoesPage() {
 
                   {solution.revealImages && (
                     <ScrollReveal animation="fade-right" delay={250} className="mt-8">
-                      <figure className="overflow-hidden rounded-xl border border-paper-line bg-white p-2 shadow-[0_16px_40px_-18px_rgba(13,13,13,0.25)]">
+                      <figure
+                        className={cn(
+                          "overflow-hidden rounded-xl border p-2",
+                          solution.light
+                            ? "border-paper-line bg-white shadow-[0_16px_40px_-18px_rgba(13,13,13,0.25)]"
+                            : "border-line bg-ink-800",
+                        )}
+                      >
                         <ClipRevealCarousel
                           images={solution.revealImages}
                           className="overflow-hidden rounded-lg"
