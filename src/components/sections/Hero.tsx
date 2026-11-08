@@ -15,6 +15,7 @@ const VIDEO_SOURCES = [
   "/videos/hero-01.mp4",
   "/videos/hero-02.mp4",
   "/videos/hero-03.mp4",
+  "/videos/hero-04.mp4",
 ];
 
 const words = hero.rotatingWords;
