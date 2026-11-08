@@ -311,12 +311,14 @@ export const cases: CaseItem[] = [
     metrics: null,
   },
   {
-    slug: "mp-viagens",
+    slug: "site-mpviagens",
     name: "MP Viagens",
     organization: "MP Viagens — Agência de Turismo, João Pessoa/PB",
     type: "Site institucional",
     description:
       "Plataforma de turismo com catálogo de viagens em grupo, filtros por categoria, páginas individuais por destino com preços e datas, e atendimento direto pelo WhatsApp.",
+    expandedDescription:
+      "A MP Viagens precisava de uma presença digital que transmitisse confiança e facilitasse o acesso às viagens disponíveis.\nA Fluxus criou uma plataforma completa com catálogo de destinos, filtros por categoria, páginas individuais por viagem com preços e datas, vídeo institucional e atendimento direto pelo WhatsApp.",
     features: [
       "Catálogo de viagens",
       "Filtro por categoria",

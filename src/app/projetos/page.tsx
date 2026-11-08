@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { cases } from "@/data/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -18,10 +19,7 @@ export const metadata: Metadata = {
 
 /* Slugs exibidos neste hub (BIA e Fluxus Igrejas permanecem em site.ts
  * para outras páginas, mas não aparecem aqui). */
-const HUB_SLUGS = ["portal-conselho-comunidade", "mp-viagens"];
-
-/* Projetos cujo "Ver detalhes" vai direto ao site externo (sem página interna). */
-const EXTERNAL_DETAILS = new Set(["mp-viagens"]);
+const HUB_SLUGS = ["portal-conselho-comunidade", "site-mpviagens"];
 
 export default function ProjetosPage() {
   return (
@@ -49,21 +47,29 @@ export default function ProjetosPage() {
               return (
                 <ScrollReveal key={item.slug} as="div" delay={100}>
                   <article className="grid items-center gap-8 lg:grid-cols-12 lg:gap-14">
-                    <figure
+                    {/* Imagem clicável: orbit (classe existente) + zoom sutil
+                        no hover; o span com overflow-hidden segura o scale */}
+                    <Link
+                      href={`/projetos/${item.slug}`}
+                      aria-label={`Ver detalhes do projeto ${item.name}`}
                       className={cn(
-                        "overflow-hidden rounded-xl border border-paper-line bg-white p-2 shadow-[0_16px_40px_-18px_rgba(13,13,13,0.25)] lg:col-span-7",
+                        "card-orbit group relative block cursor-pointer rounded-xl lg:col-span-7",
                         reversed && "lg:order-2 lg:col-start-6",
                       )}
                     >
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        width={image.width}
-                        height={image.height}
-                        sizes="(min-width: 1024px) 58vw, 100vw"
-                        className="mx-auto w-full max-w-md rounded-lg lg:max-w-none"
-                      />
-                    </figure>
+                      <figure className="overflow-hidden rounded-xl border border-paper-line bg-white p-2 shadow-[0_16px_40px_-18px_rgba(13,13,13,0.25)]">
+                        <span className="block overflow-hidden rounded-lg">
+                          <Image
+                            src={image.src}
+                            alt={image.alt}
+                            width={image.width}
+                            height={image.height}
+                            sizes="(min-width: 1024px) 58vw, 100vw"
+                            className="mx-auto w-full max-w-md rounded-lg transition-transform duration-300 group-hover:scale-[1.03] lg:max-w-none"
+                          />
+                        </span>
+                      </figure>
+                    </Link>
 
                     <div className={cn("lg:col-span-5", reversed && "lg:order-1 lg:col-start-1")}>
                       <span className="inline-flex items-center rounded-full border border-brand-700/40 bg-brand-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-brand-700">
@@ -83,24 +89,13 @@ export default function ProjetosPage() {
                         ))}
                       </ul>
                       <div className="mt-7">
-                        {EXTERNAL_DETAILS.has(item.slug) && item.externalUrl ? (
-                          <Button
-                            href={item.externalUrl}
-                            external
-                            variant="outline"
-                            className="text-ink-900 hover:bg-brand-500/10"
-                          >
-                            Ver detalhes →
-                          </Button>
-                        ) : (
-                          <Button
-                            href={`/projetos/${item.slug}`}
-                            variant="outline"
-                            className="text-ink-900 hover:bg-brand-500/10"
-                          >
-                            Ver detalhes →
-                          </Button>
-                        )}
+                        <Button
+                          href={`/projetos/${item.slug}`}
+                          variant="outline"
+                          className="text-ink-900 hover:bg-brand-500/10"
+                        >
+                          Ver detalhes →
+                        </Button>
                       </div>
                     </div>
                   </article>

@@ -101,6 +101,14 @@ export default async function ProjetoPage({
             <h1 className="mt-4 max-w-3xl text-balance">{item.name}</h1>
             <p className="mt-2 text-sm text-text-tertiary">{item.organization}</p>
             <p className="mt-5 max-w-2xl text-lg">{item.description}</p>
+            {/* Acesso rápido ao site real — para qualquer case com externalUrl */}
+            {item.externalUrl && (
+              <div className="mt-7">
+                <Button href={item.externalUrl} external variant="outline">
+                  Visitar o site →
+                </Button>
+              </div>
+            )}
           </ScrollReveal>
         </Container>
       </section>
