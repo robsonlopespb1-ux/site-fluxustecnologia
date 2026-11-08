@@ -176,6 +176,8 @@ export interface CaseItem {
   description: string;
   /** Narrativa longa da página de detalhe (parágrafos separados por \n). */
   expandedDescription?: string;
+  /** Vídeo decorativo de fundo do hero da página de detalhe. */
+  heroVideo?: string;
   features: string[];
   /** TODO: preencher com a stack real de cada projeto (conteúdo pendente).
    *  Enquanto vazio, a linha de tecnologias não é renderizada. */
@@ -196,7 +198,8 @@ export const cases: CaseItem[] = [
     description:
       "Site institucional de alta performance com foco em engajamento e transparência. Conta com hub de notícias, sistema integrado de doações, prestação de contas em tempo real e atendimento automatizado via Inteligência Artificial.",
     expandedDescription:
-      "O Conselho da Comunidade precisava de um canal seguro para prestar contas, facilitar doações e acolher a sociedade.\nA partir dessa urgência, a Fluxus desenvolveu uma solução completa. Criamos uma plataforma onde a transparência ocorre em tempo real com notas fiscais, o apoio financeiro é facilitado por um sistema ágil, e o atendimento ganhou o reforço de uma Inteligência Artificial disponível 24 horas. É a tecnologia atuando como motor de transformação social.",
+      "O Conselho da Comunidade precisava de um canal seguro para prestar contas, facilitar doações e acolher a sociedade.\nA partir dessa urgência, a Fluxus desenvolveu uma solução completa em apenas uma semana.",
+    heroVideo: "/videos/conselho-hero.mp4",
     features: [
       "Hub de Conteúdo Dinâmico",
       "Atendimento IA 24/7",

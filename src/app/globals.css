@@ -205,6 +205,72 @@
   }
 }
 
+/* ————— Ken Burns (carrossel das páginas de projeto) ————— */
+
+@keyframes kb-1 {
+  from {
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    transform: scale(1.15) translate(-3%, -2%);
+  }
+}
+
+@keyframes kb-2 {
+  from {
+    transform: scale(1) translate(0, 0);
+  }
+  to {
+    transform: scale(1.12) translate(2%, -1%);
+  }
+}
+
+@keyframes kb-3 {
+  from {
+    transform: scale(1.12) translate(-2%, -1%);
+  }
+  to {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+@keyframes kb-4 {
+  from {
+    transform: scale(1) translate(-1%, 0);
+  }
+  to {
+    transform: scale(1.1) translate(1%, -2%);
+  }
+}
+
+@utility animate-kb-1 {
+  animation: kb-1 var(--kb-duration, 5s) linear both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@utility animate-kb-2 {
+  animation: kb-2 var(--kb-duration, 5s) linear both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@utility animate-kb-3 {
+  animation: kb-3 var(--kb-duration, 5s) linear both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@utility animate-kb-4 {
+  animation: kb-4 var(--kb-duration, 5s) linear both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
 /* ————— Swipe stack (páginas de projeto) ————— */
 
 @keyframes swipe-out {

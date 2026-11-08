@@ -5,8 +5,8 @@ import { cases } from "@/data/site";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
+import { KenBurnsCarousel } from "@/components/ui/KenBurnsCarousel";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { SwipeStackCarousel } from "@/components/ui/SwipeStackCarousel";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 /* Slugs fora da lista → 404 em build/runtime (§3.2) */
@@ -47,8 +47,39 @@ export default async function ProjetoPage({
   return (
     <>
       {/* Hero do projeto */}
-      <section className="border-b border-line bg-ink-950">
-        <Container className="py-16 lg:py-24">
+      <section className="relative overflow-hidden border-b border-line bg-ink-950">
+        {item.heroVideo && (
+          <>
+            {/* Vídeo decorativo em baixa opacidade; com reduced motion o
+                próprio CSS o remove (motion-reduce:hidden) */}
+            <video
+              className="absolute inset-0 z-0 h-full w-full object-cover opacity-40 motion-reduce:hidden"
+              src={item.heroVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+              tabIndex={-1}
+            />
+            {/* Bordas do vídeo fundem no fundo da página (esconde a emenda
+                do arquivo): 4 gradientes empilhados num único overlay */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 z-0"
+              style={{
+                backgroundImage: [
+                  "linear-gradient(to bottom, #0d0d0d 0%, transparent 30%)",
+                  "linear-gradient(to top, #0d0d0d 0%, #0d0d0d 15%, transparent 50%)",
+                  "linear-gradient(to right, #0d0d0d 0%, transparent 20%)",
+                  "linear-gradient(to left, #0d0d0d 0%, transparent 20%)",
+                ].join(", "),
+              }}
+            />
+          </>
+        )}
+        <Container className="relative z-10 py-16 lg:py-24">
           <ScrollReveal>
             <nav aria-label="Breadcrumb" className="text-caption">
               <Link href="/projetos" className="transition-base hover:text-text-secondary">
@@ -125,12 +156,10 @@ export default async function ProjetoPage({
           <ScrollReveal>
             <figure className="mx-auto max-w-4xl overflow-hidden rounded-xl border border-line bg-ink-800 p-2 sm:p-3">
               {item.images.length >= 3 ? (
-                /* Pilha swipe para conjuntos grandes (proporções mistas →
-                   contain sobre o fundo da carta) */
-                <SwipeStackCarousel
+                /* Ken Burns para conjuntos grandes: zoom lento + crossfade */
+                <KenBurnsCarousel
                   images={item.images}
                   aspectClassName="aspect-[1345/500]"
-                  fit="contain"
                   className="rounded-lg"
                 />
               ) : (
