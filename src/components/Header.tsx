@@ -62,7 +62,7 @@ export function Header() {
                   className={cn(
                     "text-sm font-medium transition-base",
                     isActive(pathname, link.href)
-                      ? "text-brand-500"
+                      ? "text-brand-500 hover:text-text-primary"
                       : "text-text-secondary hover:text-text-primary",
                   )}
                 >
@@ -136,7 +136,7 @@ export function Header() {
                     className={cn(
                       "text-2xl font-semibold transition-base",
                       isActive(pathname, link.href)
-                        ? "text-brand-500"
+                        ? "text-brand-500 hover:text-text-primary"
                         : "text-text-primary hover:text-brand-500",
                     )}
                   >
