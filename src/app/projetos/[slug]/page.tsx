@@ -51,9 +51,20 @@ export default async function ProjetoPage({
         {item.heroVideo && (
           <>
             {/* Vídeo decorativo em baixa opacidade; com reduced motion o
-                próprio CSS o remove (motion-reduce:hidden) */}
+                próprio CSS o remove (motion-reduce:hidden).
+                A máscara desvanece os PRÓPRIOS pixels do vídeo nas 4 bordas
+                (horizontal ∩ vertical) — zero linha de corte por construção,
+                sem overlay para casar com o fundo. */}
             <video
-              className="absolute inset-0 z-0 h-full w-full object-cover opacity-40 motion-reduce:hidden"
+              className="absolute inset-0 z-0 h-full w-full object-cover opacity-30 motion-reduce:hidden"
+              style={{
+                maskImage:
+                  "linear-gradient(to right, transparent 0%, black 18%, black 55%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 22%, black 60%, transparent 100%)",
+                maskComposite: "intersect",
+                WebkitMaskImage:
+                  "linear-gradient(to right, transparent 0%, black 18%, black 55%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 22%, black 60%, transparent 100%)",
+                WebkitMaskComposite: "source-in",
+              }}
               src={item.heroVideo}
               autoPlay
               muted
@@ -62,20 +73,6 @@ export default async function ProjetoPage({
               preload="metadata"
               aria-hidden="true"
               tabIndex={-1}
-            />
-            {/* Bordas do vídeo fundem no fundo da página (esconde a emenda
-                do arquivo): 4 gradientes empilhados num único overlay */}
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 z-0"
-              style={{
-                backgroundImage: [
-                  "linear-gradient(to bottom, #0d0d0d 0%, transparent 30%)",
-                  "linear-gradient(to top, #0d0d0d 0%, #0d0d0d 15%, transparent 50%)",
-                  "linear-gradient(to right, #0d0d0d 0%, transparent 20%)",
-                  "linear-gradient(to left, #0d0d0d 0%, transparent 20%)",
-                ].join(", "),
-              }}
             />
           </>
         )}
