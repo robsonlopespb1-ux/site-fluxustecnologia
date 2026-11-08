@@ -68,10 +68,6 @@ export const homeServices: HomeService[] = [
     title: "Sites institucionais",
     description:
       "Sites que passam confiança, valorizam sua marca e ajudam empresas e instituições a se apresentarem de forma profissional no digital.",
-    caseRef: {
-      label: "Projeto real: Portal do Conselho da Comunidade JP",
-      href: "/projetos",
-    },
   },
   {
     number: "02",
@@ -84,7 +80,6 @@ export const homeServices: HomeService[] = [
     title: "IA e automações",
     description:
       "Assistentes virtuais com inteligência artificial para tirar dúvidas, agilizar atendimentos e facilitar o dia a dia de empresas e instituições.",
-    caseRef: { label: "Projeto real: BIA, assistente virtual", href: "/projetos" },
   },
   {
     number: "04",
