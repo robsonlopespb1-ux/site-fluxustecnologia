@@ -84,6 +84,18 @@ const solutions: Solution[] = [
         src: "/images/cases/sistemas-02.png",
         alt: "Painel administrativo do sistema",
       },
+      {
+        src: "/images/cases/sistemas-03.png",
+        alt: "Página inicial do sistema Lanche Digital para cantinas escolares",
+      },
+      {
+        src: "/images/cases/sistemas-04.png",
+        alt: "Tela de acesso do sistema Escritório Social de gestão e atendimento",
+      },
+      {
+        src: "/images/cases/sistemas-05.png",
+        alt: "Tela de acesso do sistema Audiências de Custódia",
+      },
     ],
     ctaOverride: { label: "Ver nossos sistemas →", href: "/produtos" },
   },
