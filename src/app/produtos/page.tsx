@@ -6,9 +6,9 @@ import { Container } from "@/components/ui/Container";
 import { EnergizedText } from "@/components/ui/EnergizedText";
 import { ExternalLinkIcon } from "@/components/ui/Icons";
 import { FlashlightReveal } from "@/components/ui/FlashlightReveal";
-import { ImageCarousel } from "@/components/ui/ImageCarousel";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { cn } from "@/lib/cn";
 
 export const metadata: Metadata = {
   title: "Produtos",
@@ -16,6 +16,81 @@ export const metadata: Metadata = {
     "Produtos digitais próprios da Fluxus Tecnologia. Conheça o Fluxus Gestão para Igrejas — plataforma SaaS modular.",
   alternates: { canonical: "/produtos" },
 };
+
+/* Glass cards decorativos da seção "Produtos próprios". As rotações/offsets
+   empilhados valem só no desktop (lg:) e com motion-safe — no mobile e com
+   reduced motion os cards ficam num grid limpo, sem transform. */
+interface GlassCardData {
+  emoji: string;
+  name: string;
+  description: string;
+  transform: string;
+}
+
+const glassCardsLeft: GlassCardData[] = [
+  {
+    emoji: "🌐",
+    name: "Web",
+    description: "Aplicações web modernas",
+    transform:
+      "motion-safe:lg:[transform:rotate(-6deg)_translate(-10px,-20px)]",
+  },
+  {
+    emoji: "⚡",
+    name: "Performance",
+    description: "Rápido por padrão",
+    transform: "motion-safe:lg:[transform:rotate(-3deg)_translate(-5px,0)]",
+  },
+  {
+    emoji: "📊",
+    name: "Dados",
+    description: "Decisões baseadas em dados",
+    transform: "motion-safe:lg:[transform:rotate(-1deg)_translate(-15px,20px)]",
+  },
+];
+
+const glassCardsRight: GlassCardData[] = [
+  {
+    emoji: "📱",
+    name: "Mobile",
+    description: "Funciona em qualquer tela",
+    transform: "motion-safe:lg:[transform:rotate(3deg)_translate(10px,-15px)]",
+  },
+  {
+    emoji: "🔒",
+    name: "Segurança",
+    description: "Dados protegidos",
+    transform: "motion-safe:lg:[transform:rotate(1deg)_translate(5px,5px)]",
+  },
+  {
+    emoji: "🤖",
+    name: "IA",
+    description: "Inteligência onde faz sentido",
+    transform: "motion-safe:lg:[transform:rotate(5deg)_translate(15px,25px)]",
+  },
+];
+
+function GlassCard({ card }: { card: GlassCardData }) {
+  return (
+    <div
+      className={cn(
+        "rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-[10px]",
+        "transition-all duration-300 ease-out hover:border-brand-500/30",
+        "lg:min-h-[80px] lg:w-[200px]",
+        "motion-safe:lg:hover:[transform:rotate(0deg)_scale(1.05)]",
+        card.transform,
+      )}
+    >
+      <p className="text-sm font-bold text-text-primary">
+        <span aria-hidden="true" className="mr-2">
+          {card.emoji}
+        </span>
+        {card.name}
+      </p>
+      <p className="mt-1 text-xs text-text-secondary">{card.description}</p>
+    </div>
+  );
+}
 
 export default function ProdutosPage() {
   return (
@@ -50,78 +125,65 @@ export default function ProdutosPage() {
         </section>
       </FlashlightReveal>
 
-      {/* Fluxus Gestão para Igrejas — fundo claro */}
+      {/* Produtos próprios — título energizado ao centro, glass cards
+          empilhados dos lados (desktop) ou em grid limpo acima (mobile) */}
+      <SectionWrapper className="bg-ink-950">
+        <Container>
+          <div className="lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-10">
+            {/* Mobile: todos os cards num grid 2x3, sem rotações */}
+            <ScrollReveal className="grid grid-cols-2 gap-4 lg:hidden">
+              {[...glassCardsLeft, ...glassCardsRight].map((card) => (
+                <GlassCard key={card.name} card={card} />
+              ))}
+            </ScrollReveal>
+
+            {/* Desktop: pilha esquerda */}
+            <div className="hidden lg:flex lg:flex-col lg:items-end lg:gap-6">
+              {glassCardsLeft.map((card, index) => (
+                <ScrollReveal
+                  key={card.name}
+                  animation="fade-left"
+                  delay={index * 120}
+                >
+                  <GlassCard card={card} />
+                </ScrollReveal>
+              ))}
+            </div>
+
+            {/* Título central */}
+            <ScrollReveal className="mt-12 text-center lg:mt-0">
+              <EnergizedText
+                as="h2"
+                text="Produtos próprios"
+                className="text-5xl font-bold md:text-6xl lg:text-7xl [&_.energize-word]:block"
+              />
+              <p className="mx-auto mt-6 max-w-md text-center text-lg text-text-secondary">
+                Criamos produtos digitais próprios para resolver problemas que
+                encontramos no caminho.
+              </p>
+            </ScrollReveal>
+
+            {/* Desktop: pilha direita */}
+            <div className="hidden lg:flex lg:flex-col lg:items-start lg:gap-6">
+              {glassCardsRight.map((card, index) => (
+                <ScrollReveal
+                  key={card.name}
+                  animation="fade-right"
+                  delay={index * 120}
+                >
+                  <GlassCard card={card} />
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </SectionWrapper>
+
+      {/* Banner "Conheça a plataforma" — escuro sobre seção clara,
+          com a luz orbital sempre ativa */}
       <SectionWrapper className="section-light">
         <Container>
-          <ScrollReveal className="max-w-2xl">
-            <span className="inline-flex items-center rounded-full border border-brand-700/40 bg-brand-500/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-700">
-              Produto próprio · SaaS
-            </span>
-            <EnergizedText as="h2" className="mt-6" text="Fluxus Gestão para Igrejas" />
-            <p className="mt-5">{product.description}</p>
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {product.facts.map((fact) => (
-                <li
-                  key={fact}
-                  className="rounded-full border border-paper-line bg-white px-3 py-1 text-xs text-[#52525b]"
-                >
-                  {fact}
-                </li>
-              ))}
-            </ul>
-          </ScrollReveal>
-
-          {/* Screenshots reais */}
-          <ScrollReveal delay={200} className="mt-12">
-            <figure className="overflow-hidden rounded-xl border border-paper-line bg-white p-2 shadow-[0_20px_50px_-20px_rgba(13,13,13,0.25)] sm:p-3">
-              <ImageCarousel
-                images={productScreenshots}
-                sizes="(min-width: 1024px) 80rem, 100vw"
-                aspectClassName="aspect-[1345/500]"
-                fit="contain"
-                className="overflow-hidden rounded-lg pb-1"
-              />
-            </figure>
-          </ScrollReveal>
-
-          {/* Módulos */}
-          <ScrollReveal delay={100} className="mt-16">
-            <h3 className="text-caption uppercase tracking-widest">
-              Módulos disponíveis
-            </h3>
-          </ScrollReveal>
-          <div className="mt-8 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {product.modules.map((module, index) => (
-              <ScrollReveal key={module.name} delay={index * 80}>
-                <span
-                  aria-hidden="true"
-                  className="block size-2 rounded-sm bg-brand-500"
-                />
-                <div className="mt-3 flex items-center gap-2">
-                  <h4>{module.name}</h4>
-                  {!module.available && (
-                    <span className="rounded-full border border-brand-700/40 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-brand-700">
-                      Em breve
-                    </span>
-                  )}
-                </div>
-                <p className="mt-2 text-sm">{module.description}</p>
-              </ScrollReveal>
-            ))}
-          </div>
-
-          <ScrollReveal delay={150} className="mt-14">
-            <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <Button href="/contato" size="lg">
-                Solicitar demonstração
-              </Button>
-              <p className="text-sm font-medium text-ink-900">{product.pricing}</p>
-            </div>
-          </ScrollReveal>
-
-          {/* Banner "Conheça a plataforma" — escuro sobre a seção clara,
-              com a luz orbital sempre ativa */}
-          <ScrollReveal delay={100} className="mt-16">
+          <ScrollReveal delay={100}>
             <div className="card-orbit card-orbit-always relative overflow-hidden rounded-2xl border border-line bg-ink-950 p-8 sm:p-10 lg:p-14">
               <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
                 {/* Texto */}
