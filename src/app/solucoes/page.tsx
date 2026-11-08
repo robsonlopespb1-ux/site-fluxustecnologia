@@ -28,6 +28,8 @@ interface Solution {
   revealImages?: { src: string; alt: string }[];
   /** Substitui o botão de case externo por um CTA interno. */
   ctaOverride?: { label: string; href: string };
+  /** Substitui o botão por um texto sutil (sem link). */
+  ctaNote?: string;
 }
 
 const solutions: Solution[] = [
@@ -108,12 +110,15 @@ const solutions: Solution[] = [
       "Cada assistente é construído com escopo definido e integrado aos sistemas que a organização já usa — a BIA, assistente do Conselho da Comunidade JP, nasceu exatamente assim.",
     ],
     includes: [
-      "Assistentes virtuais (chatbots)",
-      "Automação de atendimento",
-      "Consulta inteligente de informações",
+      "Assistentes virtuais com IA",
+      "Automação de processos repetitivos",
+      "Consulta inteligente de dados institucionais",
       "Integração com sistemas existentes",
+      "Atendimento 24/7 sem fila",
+      "Escopo definido e transparente",
     ],
     caseSlug: "bia-assistente-virtual",
+    ctaNote: "Em breve, apresentaremos nossos projetos de inteligência artificial.",
   },
   {
     number: "04",
@@ -204,6 +209,15 @@ export default function SolucoesPage() {
                         {solution.ctaOverride.label}
                       </Button>
                     </div>
+                  ) : solution.ctaNote ? (
+                    <p
+                      className={cn(
+                        "mt-8 text-sm italic",
+                        solution.light ? "text-[#52525b]" : "text-text-secondary",
+                      )}
+                    >
+                      {solution.ctaNote}
+                    </p>
                   ) : (
                     relatedCase?.externalUrl && (
                       <div className="mt-8">
