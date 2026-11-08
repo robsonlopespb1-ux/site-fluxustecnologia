@@ -18,6 +18,9 @@ interface FlashlightRevealProps {
   /** Conteúdo customizado como marca d'água.
       Prioridade: watermarkContent > watermarkText > imageSrc. */
   watermarkContent?: React.ReactNode;
+  /** true: o watermarkContent cobre a área inteira (fundo, ex.: vídeo);
+      false: posicionado à direita, centralizado verticalmente. */
+  watermarkFull?: boolean;
   className?: string;
   children: React.ReactNode;
 }
@@ -37,6 +40,7 @@ export function FlashlightReveal({
   watermarkText,
   watermarkColor = "text-white",
   watermarkContent,
+  watermarkFull = false,
   className,
   children,
 }: FlashlightRevealProps) {
@@ -88,7 +92,12 @@ export function FlashlightReveal({
       {watermarkContent ? (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 select-none opacity-10 md:right-12 md:opacity-20"
+          className={cn(
+            "pointer-events-none select-none opacity-10 md:opacity-20",
+            watermarkFull
+              ? "absolute inset-0 h-full w-full"
+              : "absolute right-4 top-1/2 -translate-y-1/2 md:right-12",
+          )}
         >
           {watermarkContent}
         </div>

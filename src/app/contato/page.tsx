@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import { site } from "@/data/site";
 import { ContactForm } from "@/components/ContactForm";
 import { Container } from "@/components/ui/Container";
+import { FlashlightReveal } from "@/components/ui/FlashlightReveal";
 import { InstagramIcon, MailIcon, WhatsAppIcon } from "@/components/ui/Icons";
-import { PageHero } from "@/components/ui/PageHero";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
@@ -42,11 +42,43 @@ const channels = [
 export default function ContatoPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Contato"
-        title="Vamos conversar sobre o seu projeto"
-        subtitle={<p>Conte o que você precisa. Respondemos em até 24 horas.</p>}
-      />
+      {/* Hero com efeito lanterna: o vídeo do celular dourado escondido no
+          escuro é revelado pelo círculo de luz que segue o mouse (PageHero
+          inline — o fundo opaco do componente compartilhado cobriria a
+          marca d'água). Apenas o hero é envolvido; o formulário abaixo não
+          é afetado. */}
+      <FlashlightReveal
+        watermarkFull
+        className="border-b border-line bg-ink-950"
+        watermarkContent={
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="h-full w-full object-cover motion-reduce:hidden"
+          >
+            <source src="/videos/contato-hero.mp4" type="video/mp4" />
+          </video>
+        }
+      >
+        <section>
+          <Container className="py-20 lg:py-28">
+            <ScrollReveal>
+              <p className="text-caption uppercase tracking-widest text-brand-500">
+                Contato
+              </p>
+              <h1 className="mt-4 max-w-3xl text-balance">
+                Vamos conversar sobre o seu projeto
+              </h1>
+              <div className="mt-6 max-w-2xl text-lg">
+                <p>Conte o que você precisa. Respondemos em até 24 horas.</p>
+              </div>
+            </ScrollReveal>
+          </Container>
+        </section>
+      </FlashlightReveal>
 
       {/* Formulário + canais */}
       <SectionWrapper className="section-light">
