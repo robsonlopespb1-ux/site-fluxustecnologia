@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { ClipRevealCarousel } from "@/components/ui/ClipRevealCarousel";
 import { Container } from "@/components/ui/Container";
 import { EnergizedText } from "@/components/ui/EnergizedText";
-import { PageHero } from "@/components/ui/PageHero";
+import { FlashlightReveal } from "@/components/ui/FlashlightReveal";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { cn } from "@/lib/cn";
@@ -124,16 +124,33 @@ const solutions: Solution[] = [
 export default function SolucoesPage() {
   return (
     <>
-      <PageHero
-        eyebrow="Soluções"
-        title="Tecnologia sob medida para cada desafio"
-        subtitle={
-          <EnergizedText
-            as="p"
-            text="Do site institucional à automação com IA — desenvolvemos a solução certa para o problema real da sua organização."
-          />
-        }
-      />
+      {/* Hero com efeito lanterna: a palavra "Fluxus" gigante escondida no
+          escuro é revelada pelo círculo de luz que segue o mouse (PageHero
+          inline — o fundo opaco do componente compartilhado cobriria a
+          marca d'água) */}
+      <FlashlightReveal
+        watermarkText="Fluxus"
+        className="border-b border-line bg-ink-950"
+      >
+        <section>
+          <Container className="py-20 lg:py-28">
+            <ScrollReveal>
+              <p className="text-caption uppercase tracking-widest text-brand-500">
+                Soluções
+              </p>
+              <h1 className="mt-4 max-w-3xl text-balance">
+                Tecnologia sob medida para cada desafio
+              </h1>
+              <div className="mt-6 max-w-2xl text-lg">
+                <EnergizedText
+                  as="p"
+                  text="Do site institucional à automação com IA — desenvolvemos a solução certa para o problema real da sua organização."
+                />
+              </div>
+            </ScrollReveal>
+          </Container>
+        </section>
+      </FlashlightReveal>
 
       {solutions.map((solution) => {
         const relatedCase = solution.caseSlug

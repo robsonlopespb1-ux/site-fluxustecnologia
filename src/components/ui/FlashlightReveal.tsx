@@ -5,11 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
 interface FlashlightRevealProps {
-  imageSrc: string;
-  imageAlt: string;
+  /** Imagem a revelar (alternativa: watermarkText). */
+  imageSrc?: string;
+  imageAlt?: string;
   /** Dimensões intrínsecas da imagem revelada. */
-  imageWidth: number;
-  imageHeight: number;
+  imageWidth?: number;
+  imageHeight?: number;
+  /** Texto gigante como marca d'água em vez de imagem. */
+  watermarkText?: string;
   className?: string;
   children: React.ReactNode;
 }
@@ -26,6 +29,7 @@ export function FlashlightReveal({
   imageAlt,
   imageWidth,
   imageHeight,
+  watermarkText,
   className,
   children,
 }: FlashlightRevealProps) {
@@ -71,16 +75,27 @@ export function FlashlightReveal({
       onMouseLeave={handleMouseLeave}
       className={cn("relative overflow-hidden", className)}
     >
-      {/* Marca d'água: logo grande no lado direito.
+      {/* Marca d'água no lado direito: texto gigante OU imagem.
           Mobile/reduced: opacidade menor, sempre visível (sem overlay). */}
-      <Image
-        src={imageSrc}
-        alt={imageAlt}
-        aria-hidden="true"
-        width={imageWidth}
-        height={imageHeight}
-        className="pointer-events-none absolute right-4 top-1/2 w-[400px] -translate-y-1/2 select-none opacity-10 md:right-12 md:w-[500px] md:opacity-20"
-      />
+      {watermarkText ? (
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[200px] font-bold text-white opacity-10 md:text-[250px] md:opacity-20"
+        >
+          {watermarkText}
+        </span>
+      ) : (
+        imageSrc && (
+          <Image
+            src={imageSrc}
+            alt={imageAlt ?? ""}
+            aria-hidden="true"
+            width={imageWidth}
+            height={imageHeight}
+            className="pointer-events-none absolute right-4 top-1/2 w-[400px] -translate-y-1/2 select-none opacity-10 md:right-12 md:w-[500px] md:opacity-20"
+          />
+        )
+      )}
 
       {/* Overlay-lanterna: só desktop e sem reduced motion. Sem mouse,
           preto sólido (logo escondida); com mouse, furo radial com
