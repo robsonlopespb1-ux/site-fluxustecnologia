@@ -93,7 +93,7 @@ export function FlashlightReveal({
         <div
           aria-hidden="true"
           className={cn(
-            "pointer-events-none select-none opacity-10 md:opacity-20",
+            "pointer-events-none select-none opacity-20 md:opacity-40",
             watermarkFull
               ? "absolute inset-0 h-full w-full"
               : "absolute right-4 top-1/2 -translate-y-1/2 md:right-12",
@@ -105,7 +105,7 @@ export function FlashlightReveal({
         <span
           aria-hidden="true"
           className={cn(
-            "pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[200px] font-bold opacity-10 md:text-[250px] md:opacity-20",
+            "pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[200px] font-bold opacity-20 md:text-[250px] md:opacity-40",
             watermarkColor,
           )}
         >
@@ -119,7 +119,7 @@ export function FlashlightReveal({
             aria-hidden="true"
             width={imageWidth}
             height={imageHeight}
-            className="pointer-events-none absolute right-4 top-1/2 w-[400px] -translate-y-1/2 select-none opacity-10 md:right-12 md:w-[500px] md:opacity-20"
+            className="pointer-events-none absolute right-4 top-1/2 w-[400px] -translate-y-1/2 select-none opacity-20 md:right-12 md:w-[500px] md:opacity-40"
           />
         )
       )}
@@ -133,7 +133,7 @@ export function FlashlightReveal({
           className="pointer-events-none absolute inset-0 z-10 hidden md:block"
           style={{
             background: pos
-              ? `radial-gradient(circle 150px at ${pos.x}px ${pos.y}px, transparent 0%, rgba(245,166,35,0.08) 60%, rgba(13,13,13,0.5) 80%, #0d0d0d 100%)`
+              ? `radial-gradient(circle 220px at ${pos.x}px ${pos.y}px, transparent 0%, transparent 30%, rgba(245,166,35,0.1) 55%, rgba(13,13,13,0.7) 70%, #0d0d0d 85%)`
               : "#0d0d0d",
           }}
         />
