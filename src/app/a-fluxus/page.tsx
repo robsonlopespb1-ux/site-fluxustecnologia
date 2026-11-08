@@ -172,11 +172,17 @@ export default function AFluxusPage() {
           <div className="mt-12 grid gap-x-16 gap-y-12 sm:grid-cols-2">
             {values.map((value, index) => (
               <ScrollReveal key={value.title} delay={index * 100}>
-                <span
-                  aria-hidden="true"
-                  className="block size-2 rounded-sm bg-brand-500"
-                />
-                <h3 className="mt-4">{value.title}</h3>
+                {/* Pista com a largura exata do título (w-fit): a bolinha
+                    vai e volta de ponta a ponta, com stagger entre valores */}
+                <div className="w-fit">
+                  <span aria-hidden="true" className="relative block h-2 w-full">
+                    <span
+                      className="animate-ping-pong absolute left-0 top-0 size-2 rounded-full bg-brand-500 shadow-[0_0_6px_rgba(245,166,35,0.5)]"
+                      style={{ animationDelay: `${index * 0.5}s` }}
+                    />
+                  </span>
+                  <h3 className="mt-4">{value.title}</h3>
+                </div>
                 <p className="mt-3">{value.description}</p>
               </ScrollReveal>
             ))}

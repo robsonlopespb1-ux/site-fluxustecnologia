@@ -205,6 +205,27 @@
   }
 }
 
+/* ————— Bolinha ping-pong dos valores (/a-fluxus) ————— */
+
+/* `left` em % é relativo ao containing block (a pista com a largura do
+   título) — translateX(%) seria relativo à própria bolinha de 8px. */
+@keyframes ping-pong {
+  0%,
+  100% {
+    left: 0;
+  }
+  50% {
+    left: calc(100% - 8px);
+  }
+}
+
+@utility animate-ping-pong {
+  animation: ping-pong 3s ease-in-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
 /* ————— Ken Burns (carrossel das páginas de projeto) ————— */
 
 @keyframes kb-1 {
