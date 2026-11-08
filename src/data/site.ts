@@ -316,12 +316,15 @@ export const cases: CaseItem[] = [
     organization: "MP Viagens — Agência de Turismo, João Pessoa/PB",
     type: "Site institucional",
     description:
-      "Site de turismo para agência de viagens em João Pessoa, com busca de destinos, pacotes e contato direto com consultores.",
+      "Plataforma de turismo com catálogo de viagens em grupo, filtros por categoria, páginas individuais por destino com preços e datas, e atendimento direto pelo WhatsApp.",
     features: [
-      "Busca de destinos",
-      "Pacotes de viagem",
-      "WhatsApp direto",
+      "Catálogo de viagens",
+      "Filtro por categoria",
+      "Página por destino",
+      "Consulta via WhatsApp",
+      "Vídeo institucional",
       "Design responsivo",
+      "Integração Instagram",
     ],
     technologies: [],
     images: [
